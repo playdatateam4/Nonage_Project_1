@@ -84,3 +84,13 @@ function go_save__modify() {
 	    document.formm.submit();
 	  }
 }
+
+function delete_Usr() {
+	if (confirm("회원 탈퇴를 하시겠습니까?")) {
+		alert("회원탈퇴 처리되었습니다. 이용해주셔서 감사합니다.");
+		document.formm.action = "NonageServlet?command=deleteUsr";
+	    document.formm.submit();
+		} else {
+		  return;
+		}
+	}

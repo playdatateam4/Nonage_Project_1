@@ -134,6 +134,29 @@ public class MemberDAO {
 		return result;
 	}
 
+	public int deleteMember (MemberVO memberVO) {
+		int result = 0;
+		String sql = "update member set useyn='n' where id=?";
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberVO.getId());
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+		return result;
+	}
+	
 	/*
 	 * * 관리자 모드에서 사용되는 메소드 * *
 	 */
