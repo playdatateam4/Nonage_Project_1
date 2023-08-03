@@ -21,6 +21,7 @@ public class CartDeleteAction implements Action {
 			CartDAO cartDAO = CartDAO.getInstance();
 			cartDAO.deleteCart(Integer.parseInt(cseq));
 		}
-		request.getRequestDispatcher(url).forward(request, response);
+//		request.getRequestDispatcher(url).forward(request, response);
+		response.sendRedirect("NonageServlet?command=cart_list");
 	}
 }
