@@ -27,8 +27,8 @@
         <input type="text"       name="zipNum"  value="${loginUser.getZipNum()}" size="10" >      
         <input type="button"     value="주소 찾기" class="dup" onclick="post_zip()"><br>
         <label>Address</label> 
-        <input type="text"        name="addr1"	value="${requestScope.add1}"   size="50">
-        <input type="text"        name="addr2"  value="${requestScope.add2}"	size="25"> <br>
+        <input type="text"        name="addr1"	value="${requestScope.add1}"   size="35">
+        <input type="text"        name="addr2"  value="${requestScope.add2}"	size="30"> <br>
         <label>Phone Number</label> 
         <input  type="text"       name="phone"	value="${loginUser.getPhone()}"><br>
       </fieldset>
