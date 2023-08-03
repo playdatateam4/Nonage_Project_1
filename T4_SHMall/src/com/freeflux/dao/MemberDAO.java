@@ -103,6 +103,36 @@ public class MemberDAO {
 		}
 		return result;
 	}
+	
+	public int updateMember (MemberVO memberVO) {
+		int result = 0;
+		String sql = "update member set pwd=?, name=?, zip_num=?,";
+		sql += " email=?, address=?, phone=? where id=?";
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberVO.getPwd());
+			pstmt.setString(2, memberVO.getName());
+			pstmt.setString(3, memberVO.getZipNum());
+			pstmt.setString(4, memberVO.getEmail());
+			pstmt.setString(5, memberVO.getAddress());
+			pstmt.setString(6, memberVO.getPhone());
+			pstmt.setString(7, memberVO.getId());
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+		return result;
+	}
 
 	/*
 	 * * 관리자 모드에서 사용되는 메소드 * *

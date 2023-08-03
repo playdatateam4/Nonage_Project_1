@@ -50,6 +50,10 @@ public class ActionFactory {
 			action = new OrderInsertAction();
 		} else if (command.equals("order_list")) {
 			action = new OrderListAction();
+		} else if (command.equals("modifyUsr")) {
+			action = new ModifyUsrAction();
+		} else if (command.equals("modifyUsr_form")) {
+			action = new ModifyUsrFormAction();
 		} else if (command.equals("mypage")) {
 			action = new MyPageAction();
 		} else if (command.equals("order_detail")) {
