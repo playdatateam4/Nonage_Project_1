@@ -39,7 +39,7 @@
           <th colspan="2"> 
             <fmt:formatNumber value="${totalPrice}" type="currency"/><br>
           </th> 
-          <th><a href="#" onclick="go_cart_delete()"><h3>삭제하기</h3></a></th>                       
+          <th><a onclick="go_cart_delete()"><h3>삭제하기</h3></a></th>                     
         </tr> 
       </table> 
     </c:otherwise>  
