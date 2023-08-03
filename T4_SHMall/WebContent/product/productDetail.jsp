@@ -20,6 +20,8 @@
           <label> 수 량 : </label>
           <input  type="text"      name="quantity"  size="2"      value="1"><br>
           <input  type="hidden"    name="pseq"       value="${productVO.pseq}"><br>
+          <label> 상세 설명 </label>
+          <th>${productVO.content}</th>
         </fieldset>
         <div class="clear"></div>
         <div id="buttons">

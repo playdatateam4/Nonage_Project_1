@@ -18,10 +18,8 @@ function go_cart_delete() {
   }
 
   for ( var i = 0; i < document.formm.cseq.length; i++) {
-    alert("" + document.formm.cseq[i].checked);
     if (document.formm.cseq[i].checked == true) {
       count++;
-      alert("" + count);
     }
   }
   if (count == 0) {
@@ -65,3 +63,4 @@ function go_order() {
   document.formm.action = "NonageServlet?command=mypage";
   document.formm.submit();
 }
+
