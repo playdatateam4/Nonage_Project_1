@@ -22,7 +22,7 @@ public class AdminProductUpdateAction implements Action {
 		String url = "NonageServlet?command=admin_product_list";
 
 		HttpSession session = request.getSession();
-
+		
 		int sizeLimit = 5 * 1024 * 1024;
 		String savePath = "product_images";
 		ServletContext context = session.getServletContext();
@@ -43,7 +43,24 @@ public class AdminProductUpdateAction implements Action {
 		productVO.setPrice2(Integer.parseInt(multi.getParameter("price2")));
 		productVO.setPrice3(
 				Integer.parseInt(multi.getParameter("price2")) - Integer.parseInt(multi.getParameter("price1")));
+		
+		System.out.println("adminproductupdateaction asdkjsdaflkajshdklashfkl");
+		System.out.println("bestyn : "+multi.getParameter("bestyn"));
+		System.out.println("useyn : "+multi.getParameter("useyn"));
+		
+		if(multi.getParameter("bestyn")==null) {
+			productVO.setBestyn("n");
+		}else {
+			productVO.setBestyn(multi.getParameter("bestyn"));
+		}
+		if(multi.getParameter("useyn")==null) {
+			productVO.setUseyn("n");
+		}else {
+			productVO.setUseyn(multi.getParameter("useyn"));
+		}
+		
 		productVO.setContent(multi.getParameter("content"));
+		
 		if (multi.getFilesystemName("image") == null) {
 			productVO.setImage(multi.getParameter("nonmakeImg"));
 		} else {
