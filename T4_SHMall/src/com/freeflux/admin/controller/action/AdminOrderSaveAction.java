@@ -16,6 +16,8 @@ public class AdminOrderSaveAction implements Action {
 		String url = "NonageServlet?command=admin_order_list";
 
 		String[] resultArr = request.getParameterValues("result");
+		
+		System.out.println(resultArr);
 
 		for (String oseq : resultArr) {
 			System.out.println(oseq);
