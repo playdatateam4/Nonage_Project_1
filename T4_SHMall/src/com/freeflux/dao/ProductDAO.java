@@ -3,6 +3,7 @@ package com.freeflux.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.freeflux.dto.ProductVO;
@@ -79,6 +80,7 @@ public class ProductDAO {
 	public ProductVO getProduct(String pseq) {
 		ProductVO product = null;
 		String sql = "select * from product where pseq=?";
+		System.out.println("getProduct");
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -102,6 +104,9 @@ public class ProductDAO {
 				product.setUseyn(rs.getString("useyn"));
 				product.setBestyn(rs.getString("bestyn"));
 				product.setIndate(rs.getTimestamp("indate"));
+				
+				System.out.println("useyn : "+rs.getString("useyn"));
+				System.out.println("bestyn : "+rs.getString("bestyn"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -331,6 +336,26 @@ public class ProductDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			DBManager.close(con, pstmt);
+		}
+		return result;
+	}
+	
+	public int deleteProduct(String pseq) {
+		String sql = "delete from product where pseq=?";
+		int result = -1;
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+	
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,pseq);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
 			DBManager.close(con, pstmt);
 		}
 		return result;
