@@ -25,10 +25,12 @@ public class ModifyUsrFormAction implements Action {
 			MemberDAO memberDAO = MemberDAO.getInstance();
 			loginUser = memberDAO.getMember(loginUser.getId());
 			
-			String[] address = loginUser.getAddress().split("///");
-			request.setAttribute("add1", address[0]);
-			request.setAttribute("add2", address[1]);
-			request.setAttribute("loginUser", loginUser);
+			if (loginUser.getAddress() != null) {
+				String[] address = loginUser.getAddress().split("///");
+				request.setAttribute("add1", address[0]);
+				request.setAttribute("add2", address[1]);
+				request.setAttribute("loginUser", loginUser);
+			}
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);

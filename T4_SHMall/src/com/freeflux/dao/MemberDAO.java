@@ -124,8 +124,7 @@ public class MemberDAO {
 			pstmt.setString(7, memberVO.getId());
 			
 			result = pstmt.executeUpdate();
-			
-			System.out.println(result);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -147,8 +146,7 @@ public class MemberDAO {
 			pstmt.setString(1, memberVO.getId());
 			
 			result = pstmt.executeUpdate();
-			
-			System.out.println(result);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
