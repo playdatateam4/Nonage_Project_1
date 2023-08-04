@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.freeflux.dao.MemberDAO;
+import com.freeflux.dao.WorkerDAO;
 import com.freeflux.dto.MemberVO;
 
 public class LoginAction implements Action {
@@ -15,6 +16,7 @@ public class LoginAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "member/login_fail.jsp";
+		String login_result = "fail";
 		HttpSession session = request.getSession();
 
 		String id = request.getParameter("id");
@@ -25,13 +27,16 @@ public class LoginAction implements Action {
 		MemberVO memberVO = memberDAO.getMember(id);
 
 		if (memberVO != null) {
-			if (memberVO.getPwd().equals(pwd)) {
+			if (memberVO.getPwd().equals(pwd) && memberVO.getUseyn().equals("y")) {
 				session.removeAttribute("id");
 				session.setAttribute("loginUser", memberVO);
 				url = "NonageServlet?command=index";
+			} else if(memberVO.getPwd().equals(pwd) && memberVO.getUseyn().equals("n")) {
+				login_result = "deleted";
 			}
 		}
 
+		request.setAttribute("login_result", login_result);
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 }
