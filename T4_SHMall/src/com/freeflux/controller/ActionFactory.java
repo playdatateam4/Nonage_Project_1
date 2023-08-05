@@ -105,9 +105,13 @@ public class ActionFactory {
 			action = new AdminQnaDetailAction();
 		} else if (command.equals("admin_qna_repsave")) {
 			action = new AdminQnaResaveAction();
-		}else if (command.equals("admin_product_delete")) {
+		} else if (command.equals("admin_product_delete")) {
 			action = new AdminProductDeleteAction();
 		}
+		else if (command.equals("admin_member_withdrawl")) {
+			action = new AdminMemberDeleteAction();
+		}
+		
 		return action;
 	}
 }
