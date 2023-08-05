@@ -138,19 +138,33 @@ function go_mod_save(tpage, pseq) {
 			// [1] 상품을 삭제하지 않는 대신 사용하지 않음을 products 테이블의 useyn 컬럼에 1을 채워 넣기 위해서
 			// useyns hidden 태그에 1을 지정한다.
 			if (theForm.useyn.checked == true) {
-				theForm.useyn.value = "y";
+				theForm.useyn.value = 'y';
+			}
+			else{
+				theForm.useyn.value = 'n';
 			}
 			if(theForm.bestyn.checked == true) {
-				theForm.bestyn.value = "y";
+				theForm.bestyn.value = 'y';
 			}
+			else {
+				theForm.bestyn.value = 'n';
+			}
+		
+			
 			theForm.encoding = "multipart/form-data";
-			// theForm.seq.value=seq;
+			
+			//theForm.seq.value=pseq;
+			
 			theForm.price1.value = removeComma(theForm.price1);
 			theForm.price2.value = removeComma(theForm.price2);
 			theForm.price3.value = removeComma(theForm.price3);
 			// [2] products 테이블의 상품 정보를 수정하는 처리를 하는 product_modsave.jsp 페이지로
 			// 이동하되 상품 코드를 전달해준다. 상품코드로 폴더를 생성해서 그곳에 이미지 파일을 업로드하기 때문이다.			
 			theForm.action = "NonageServlet?command=admin_product_update";
+			
+			console.log('theForm.useyn.value : ' + theForm.useyn.value)
+			console.log('theForm.bestyn.value : ' + theForm.bestyn.value)
+			
 			theForm.submit();
 		}
 	}
@@ -160,4 +174,14 @@ function go_mod_mov(tpage, pseq) {
 	var theForm = document.frm;
 	theForm.action = 'NonageServlet?command=admin_product_detail&tpage=' + tpage + "&pseq=" + pseq;
 	theForm.submit();
+}
+
+//productDetail.jsp => 삭제 버튼
+function go_mod_delete(pseq){
+	var theForm = document.frm;
+	theForm.pseq.value=pseq;
+	if (confirm('삭제하시겠습니까?')) {
+		theForm.action = "NonageServlet?command=admin_product_delete";
+		theForm.submit();
+	}
 }
