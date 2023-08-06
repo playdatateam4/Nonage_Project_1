@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import com.freeflux.dto.WorkerVO;
 import com.freeflux.util.DBManager;
 
 public class WorkerDAO {
@@ -49,6 +50,34 @@ public class WorkerDAO {
 		} catch (Exception e) {
 		}
 		return result;
+	}
+	
+	public WorkerVO getWorker(String id) {
+		WorkerVO workerVO = null;
+		String sql = "select * from worker where id=?";
+
+		Connection connn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			connn = DBManager.getConnection();
+			pstmt = connn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				workerVO = new WorkerVO();
+				workerVO.setId(rs.getString("id"));
+				workerVO.setPwd(rs.getString("pwd"));
+				workerVO.setName(rs.getString("name"));
+				workerVO.setPhone(rs.getString("phone"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(connn, pstmt, rs);
+		}
+		return workerVO;
 	}
 
 }// WorkerDAO
