@@ -14,10 +14,22 @@ public class ProductVO {
 	private String useyn;
 	private String bestyn;
 	private Timestamp indate;
+	private int inventory;
 
 	public ProductVO() {
 
 	}
+	
+	public int getInventory() {
+		return inventory;
+	}
+
+
+	public void setInventory(int inventory) {
+		this.inventory = inventory;
+	}
+
+
 
 	public int getPseq() {
 		return pseq;

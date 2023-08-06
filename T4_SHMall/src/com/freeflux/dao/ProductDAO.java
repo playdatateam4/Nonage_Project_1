@@ -104,6 +104,7 @@ public class ProductDAO {
 				product.setUseyn(rs.getString("useyn"));
 				product.setBestyn(rs.getString("bestyn"));
 				product.setIndate(rs.getTimestamp("indate"));
+				product.setInventory(rs.getInt("inventory"));
 				
 				System.out.println("useyn : "+rs.getString("useyn"));
 				System.out.println("bestyn : "+rs.getString("bestyn"));
@@ -285,8 +286,8 @@ public class ProductDAO {
 	public int insertProduct(ProductVO product) {
 		int result = 0;
 
-		String sql = "insert into product (" + "pseq, kind, name, price1, price2, price3, content, image) "
-				+ "values(product_seq.nextval, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into product (" + "pseq, kind, name, price1, price2, price3, content, image,inventory) "
+				+ "values(product_seq.nextval, ?, ?, ?, ?, ?, ?, ?,?)";
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -301,6 +302,7 @@ public class ProductDAO {
 			pstmt.setInt(5, product.getPrice3());
 			pstmt.setString(6, product.getContent());
 			pstmt.setString(7, product.getImage());
+			pstmt.setInt(8, product.getInventory());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("추가 실패");

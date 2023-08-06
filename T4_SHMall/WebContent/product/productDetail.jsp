@@ -20,16 +20,24 @@
           <label> 수 량 : </label>
           <input  type="text"      name="quantity"  size="2"      value="1"><br>
           <input  type="hidden"    name="pseq"       value="${productVO.pseq}"><br>
-           <label> 중고 여부 : </label>
+           <label> 사용 : </label>
            <c:choose>
-								<c:when test="${productVO.useyn=='y'}">
-									 <p> 중고 </p>
-								</c:when>
-								<c:otherwise>
-									 <p> 신상품 </p>
-								</c:otherwise>
-							</c:choose>
-           
+				<c:when test="${productVO.useyn=='y'}">
+					<p> 중고 </p>
+				</c:when>
+				<c:otherwise>
+					<p> 신상품 </p>
+				</c:otherwise>
+			</c:choose>
+            <label> 재고 : </label>
+            <c:choose>
+				<c:when test="${productVO.inventory>0}">
+					<p> ${productVO.inventory}개 </p>
+				</c:when>
+				<c:otherwise>
+					<p> 재고없음 </p>
+				</c:otherwise>
+			</c:choose>
         </fieldset>
         <div class="clear"></div>
         <div id="buttons">

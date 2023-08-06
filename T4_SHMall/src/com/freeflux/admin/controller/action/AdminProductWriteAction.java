@@ -43,6 +43,7 @@ public class AdminProductWriteAction implements Action {
 				Integer.parseInt(multi.getParameter("price2")) - Integer.parseInt(multi.getParameter("price1")));
 		productVO.setContent(multi.getParameter("content"));
 		productVO.setImage(multi.getFilesystemName("image"));
+		productVO.setInventory(Integer.parseInt(multi.getParameter("inventory")));
 
 		ProductDAO productDAO = ProductDAO.getInstance();
 		productDAO.insertProduct(productVO);

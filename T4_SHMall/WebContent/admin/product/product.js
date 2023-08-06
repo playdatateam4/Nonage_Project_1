@@ -44,11 +44,15 @@ function go_save()
 	} else if (theForm.image.value == '') {
 		alert('상품이미지들 입력하세요.');
 		theForm.image.focus();
+	} else if (theForm.inventory.value == '') {
+		alert('재고를 입력하세요.');
+		theForm.content.focus();
 	} else {
 		theForm.encoding = "multipart/form-data";
 		theForm.price1.value = removeComma(theForm.price1);
 		theForm.price2.value = removeComma(theForm.price2);
 		theForm.price3.value = removeComma(theForm.price3);
+		theForm.inventory.value = removeComma(theForm.inventory);
 
 		// productWrite.jsp 폼 페이지에서 입력받은 값을
 		// 디비에 추가하기 위한 페이지인 product_save.jsp로 이동하되

@@ -201,3 +201,23 @@ insert into orders(oseq, id) values(orders_seq.nextval, 'four');
 insert into qna (qseq, subject, content, id)
 	values(qna_seq.nextval, '테스트4', '질문내용4', 'four');
 	commit;
+
+-- 2023.08.07 허찬
+-- product 테이블에 inventory 칼럼 추가
+ALTER TABLE product
+ADD inventory NUMBER DEFAULT 1 NOT NULL;
+
+-- product 테이블 목록 재고 간단 업데이트
+
+UPDATE product set inventory = 10 where pseq = 1;
+UPDATE product set inventory = 10 where pseq = 2;
+UPDATE product set inventory = 10 where pseq = 3;
+UPDATE product set inventory = 10 where pseq = 4;
+UPDATE product set inventory = 10 where pseq = 5;
+UPDATE product set inventory = 10 where pseq = 6;
+UPDATE product set inventory = 10 where pseq = 7;
+UPDATE product set inventory = 10 where pseq = 8;
+UPDATE product set inventory = 10 where pseq = 9;
+UPDATE product set inventory = 10 where pseq = 10;
+UPDATE product set inventory = 10 where pseq = 11;
+UPDATE product set inventory = 10 where pseq = 12;
