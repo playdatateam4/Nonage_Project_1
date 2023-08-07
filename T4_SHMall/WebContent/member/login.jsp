@@ -19,7 +19,7 @@
             <input type="button" value="회원가입" class="cancel" style="cursor: pointer;"
                  onclick="location='NonageServlet?command=join_form'">
             <input type="button" value="아이디 비밀번호 찾기" class="submit" style="cursor: pointer;"
-                 onclick="location='NonageServlet?command=find_id_form'">     
+                 onclick="location='NonageServlet?command=find_id_pwd_form'">     
         </div>
     </form>  
   </article>
