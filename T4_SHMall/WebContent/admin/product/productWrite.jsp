@@ -19,8 +19,12 @@
 				</select>
 			<tr>
 				<th>상품명</th>
-				<td width="343" colspan="5">
+				<td width="180" colspan="3">
 					<input type="text" name="name" size="47" maxlength="100">
+				</td>
+				<th>재고</th>
+				<td width="72">
+					<input type="text" name="inventory" size="11" placeholder="0" onBlur="go_ab()" onKeyUp='NumFormat(this)'>
 				</td>
 			</tr>
 			<tr>
@@ -35,10 +39,6 @@
 				<th>[B-A]</th>
 				<td width="72">
 					<input type="text" name="price3" size="11" placeholder="0" onKeyUp='NumFormat(this)' readonly>
-				</td>
-				<th>재고</th>
-				<td width="72">
-					<input type="text" name="inventory" size="11" placeholder="0" onBlur="go_ab()" onKeyUp='NumFormat(this)'>
 				</td>
 			</tr>
 
