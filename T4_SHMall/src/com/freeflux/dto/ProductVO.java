@@ -15,6 +15,16 @@ public class ProductVO {
 	private String bestyn;
 	private Timestamp indate;
 	private int inventory;
+	private String deleted;
+	
+
+	public String getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(String deleted) {
+		this.deleted = deleted;
+	}
 
 	public ProductVO() {
 

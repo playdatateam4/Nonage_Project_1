@@ -72,6 +72,12 @@ public class ActionFactory {
 			action = new QnaWriteAction();
 		} else if (command.equals("qna_view")) {
 			action = new QnaViewAction();
+		}  else if (command.equals("find_id_pwd_form")) {
+			action = new FindIdPwdAction();
+		} else if (command.equals("find_id")) {
+			action = new FindIdAction();
+		} else if (command.equals("find_pwd")) {
+			action = new FindPasswordAction();
 		}
 
 		// admin

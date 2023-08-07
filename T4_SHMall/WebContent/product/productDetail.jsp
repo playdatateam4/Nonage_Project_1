@@ -2,7 +2,15 @@
   pageEncoding="UTF-8"%>  
 <%@ include file="../header.jsp" %>  
 <%@ include file="sub_img.html"%> 
-<%@ include file="sub_menu.html" %>       
+<%@ include file="sub_menu.html" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.cancel').click(function() {
+        window.history.back();
+    });
+});
+</script>    
   <article>
     <h1> Item </h1>
     <div id="itemdetail" >

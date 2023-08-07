@@ -55,7 +55,7 @@ public class OrderDAO {
 		return maxOseq;
 	}
 
-	public void insertOrderDetail(CartVO cartVO, int maxOseq) {
+	public int insertOrderDetail(CartVO cartVO, int maxOseq) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
@@ -80,6 +80,7 @@ public class OrderDAO {
 		} finally {
 			DBManager.close(conn, pstmt);
 		}
+		return maxOseq;
 	}
 
 	// 사용자가 주문 내역 검색

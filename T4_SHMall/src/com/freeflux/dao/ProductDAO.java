@@ -119,7 +119,7 @@ public class ProductDAO {
 
 	public ArrayList<ProductVO> listKindProduct(String kind) {
 		ArrayList<ProductVO> productList = new ArrayList<ProductVO>();
-		String sql = "select * from product where kind=?";
+		String sql = "select * from product where kind=? and deleted='X'";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -232,9 +232,9 @@ public class ProductDAO {
 	public ArrayList<ProductVO> listProduct(int tpage, String product_name) {
 		ArrayList<ProductVO> productList = new ArrayList<ProductVO>();
 
-		String str = "select pseq, indate, name, price1, price2, useyn, bestyn "
-				+ " from product where name like '%'||?||'%' order by pseq desc";
-
+		String str = "select pseq, indate, name, price1, price2, useyn, bestyn, DELETED "
+		        + " from product where name like '%'||?||'%' order by pseq desc";
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -267,6 +267,7 @@ public class ProductDAO {
 					product.setPrice2(rs.getInt(5));
 					product.setUseyn(rs.getString(6));
 					product.setBestyn(rs.getString(7));
+					product.setDeleted(rs.getString(8));
 					productList.add(product);
 					if (rs.isLast()) {
 						break;
