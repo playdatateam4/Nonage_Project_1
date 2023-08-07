@@ -16,11 +16,23 @@ public class CartInsertAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "NonageServlet?command=cart_list";
+		String go =request.getParameter("go");
 
 		HttpSession session = request.getSession();
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 		if (loginUser == null) {
 			url = "NonageServlet?command=login_form";
+		} else if(loginUser != null && go.equals("orderInsert")){
+			url = "NonageServlet?command=order_insert";
+			
+			CartVO cartVO = new CartVO();
+			cartVO.setId(loginUser.getId());
+			cartVO.setPseq(Integer.parseInt(request.getParameter("pseq")));
+			cartVO.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+
+			CartDAO cartDAO = CartDAO.getInstance();
+			cartDAO.insertCart(cartVO);
+			
 		} else {
 			CartVO cartVO = new CartVO();
 			cartVO.setId(loginUser.getId());
