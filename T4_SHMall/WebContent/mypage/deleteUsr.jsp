@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>  
 <%@ include file="../header.jsp" %>	 
 <%@ include file="sub_img.html"%> 
-<%@ include file="sub_menu.jsp" %>   
+<%@ include file="sub_menu_mypage.jsp" %>   
   <article>
     <h2>Delete User Account</h2>
     <form id="deleteUsr_form" action="NonageServlet?command=deleteUsr" 

@@ -42,6 +42,8 @@ public class MyPageAction implements Action {
 				orderVO.setPrice2(totalPrice);
 				orderList.add(orderVO);
 			}
+			
+			request.setAttribute("from", request.getParameter("from"));
 			request.setAttribute("title", "진행 중인 주문 내역");
 			request.setAttribute("orderList", orderList);
 		}
