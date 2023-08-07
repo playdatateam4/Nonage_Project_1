@@ -34,15 +34,20 @@
 			}
 		});
 	});
+	function modPwd(){
+		if (document.formm.newPwd.value == "") {
+		    alert("비밀번호를 입력해주세요.");
+		    document.formm.newPwd.focus();
+		    return;
+		  }
+		document.formm.action = "/T4_SHMall/NonageServlet?command=change_pwd";
+	    document.formm.submit();
+	}
 </script>
 </head>
 <body>
-<form action="/T4_SHMall1/changePassword" method="post">
+<form id="cpwd" method="post" name="formm" >
 	<table>
-	<tr>
-		<td>현재 비밀번호 : </td>
-		<td><input type="text" name="curPwd" value="<%= session.getAttribute("pwd") %>" disabled /></td>
-	</tr>
 	<tr>
 		<td><input type="hidden" name="userId" value="<%= session.getAttribute("memberId") %>"></td>
 	</tr>
@@ -56,7 +61,7 @@
 	</tr>
 	<tr>
         <td colspan="2">
-        <input type="submit" value="비밀번호 변경"" ></td>
+        <input type="submit" value="비밀번호 변경" onclick="modPwd()"></td>
     </tr>
 	</table>
 	

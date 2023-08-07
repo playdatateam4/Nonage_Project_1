@@ -78,6 +78,8 @@ public class ActionFactory {
 			action = new FindIdAction();
 		} else if (command.equals("find_pwd")) {
 			action = new FindPasswordAction();
+		} else if (command.equals("change_pwd")) {
+			action = new ChangePasswordAction();
 		}
 
 		// admin
