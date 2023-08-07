@@ -221,3 +221,8 @@ UPDATE product set inventory = 10 where pseq = 9;
 UPDATE product set inventory = 10 where pseq = 10;
 UPDATE product set inventory = 10 where pseq = 11;
 UPDATE product set inventory = 10 where pseq = 12;
+
+-- 2023-08-07 백승주
+-- 상품 리스트에 삭제 처리 표시 기능을 위한 칼럼 추가
+ALTER TABLE product
+add deleted varchar(1) default 'X' not null;
