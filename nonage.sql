@@ -31,7 +31,7 @@
 	    price3     number(7)     default '0',
 	    content    varchar2(1000),
 	    image      varchar2(50)  default 'default.jpg',
-	    useyn      char(1)       default 'y',
+	    useyn      char(1)       default 'n',
 	    bestyn     char(1)       default 'n',
 	    indate     date          default sysdate  
 	);
@@ -221,8 +221,17 @@ UPDATE product set inventory = 10 where pseq = 9;
 UPDATE product set inventory = 10 where pseq = 10;
 UPDATE product set inventory = 10 where pseq = 11;
 UPDATE product set inventory = 10 where pseq = 12;
+commit;
 
 -- 2023-08-07 백승주
 -- 상품 리스트에 삭제 처리 표시 기능을 위한 칼럼 추가
 ALTER TABLE product
 add deleted varchar(1) default 'X' not null;
+commit;
+
+-- 2023-08-07 허찬
+-- product table useyn 디폴트 값 'n'으로 변경 (useyn는 중고 여부,1은 예,0은 아니요)
+-- 테이블 생성문을 바꿔도 되고 밑 sql문 사용해도됩니다
+-- alter table product
+-- MODIFY useyn DEFAULT 'n';
+-- commit;

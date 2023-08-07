@@ -9,8 +9,8 @@ import java.sql.SQLException;
 public class DBManager {
 
 	private static String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	private static String uid = "chan";
-	private static String pwd = "0000";
+	private static String uid = "team4";
+	private static String pwd = "1234";
 
 	public static Connection getConnection() {
 		Connection conn = null;
