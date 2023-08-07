@@ -11,8 +11,14 @@ public class JoinFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "/member/join.jsp";
+		String url = "NonageServlet?command=contract";
 
+		System.out.println(request.getParameter("contract"));
+		
+		if(request.getParameter("contract")!=null && request.getParameter("contract").equals("agree")) {
+			url = "/member/join.jsp";
+		}
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}
