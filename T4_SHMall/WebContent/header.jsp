@@ -2,14 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Nonage Shop</title>
-<link href="css/shopping.css" rel="stylesheet">
-<script type="text/javascript" src="member/member.js"></script>
-<script type="text/javascript" src="mypage/mypage.js"></script>
+<link href="${contextPath}/css/shopping.css" rel="stylesheet">
+<script type="text/javascript" src="${contextPath}/member/member.js"></script>
+<script type="text/javascript" src="${contextPath}/mypage/mypage.js"></script>
 </head>
 
 <body>

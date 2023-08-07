@@ -61,9 +61,15 @@ function go_order_delete() {
   }
 }
 
-function go_order() {
-  document.formm.action = "NonageServlet?command=mypage";
-  document.formm.submit();
+
+function go_order_now() {
+	  if (document.formm.quantity.value == "") {
+    alert("수량을 입력하여 주세요.");
+    document.formm.quantity.focus();
+  } else {
+    document.formm.action = "NonageServlet?command=cart_insert&go=orderInsert";
+  	document.formm.submit();
+  }
 }
 
 function go_save__modify() {
