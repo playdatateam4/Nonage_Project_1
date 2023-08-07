@@ -13,7 +13,7 @@
 		<table id="list">
 			<tr>
 				<th>상품분류</th>
-				<td colspan="5"><select name="kind">
+				<td colspan="6"><select name="kind">
 						<c:forEach items="${kindList}" var="kind" varStatus="status">
 							<c:choose>
 								<c:when test="${productVO.kind==status.count}">
