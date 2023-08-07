@@ -35,6 +35,10 @@
 				<td width="72">
 					<input type="text" name="price3" size="11" readonly onKeyUp='NumFormat(this)'>
 				</td>
+				<th>재고</th>
+				<td width="72">
+					<input type="text" name="inventory" size="11" onBlur="go_ab()" onKeyUp='NumFormat(this)'>
+				</td>
 			</tr>
 
 			<tr>

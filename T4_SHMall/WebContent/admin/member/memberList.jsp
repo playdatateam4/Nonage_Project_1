@@ -7,6 +7,15 @@
 		document.frm.action = "NonageServlet?command=admin_member_list";
 		document.frm.submit();
 	}
+	function go_member_total_delete(member_id) {
+		var theForm = document.frm;
+		theForm.id.value = member_id;
+		console.log("theForm.id.value : "+member_id);
+		if(confirm("탈퇴처리하겠습니까?")){
+			theForm.action = "NonageServlet?command=admin_member_withdrawl";
+			theForm.submit();
+		}
+	}
 </script>
 
 <article>
@@ -22,13 +31,14 @@
 		<br>
 		<table id="orderList">
 			<tr>
-				<th>아디디(탈퇴여부)</th>
+				<th>아이디(탈퇴여부)</th>
 				<th>이름</th>
 				<th>이메일</th>
 				<th>우편번호</th>
 				<th>주소</th>
 				<th>전화</th>
 				<th>가입일</th>
+				<th>완전 탈퇴</th>
 			</tr>
 			<c:forEach items="${memberList}" var="memberVO">
 				<tr>
@@ -47,7 +57,13 @@
 					<td>${memberVO.zipNum}</td>
 					<td>${memberVO.address}</td>
 					<td>${memberVO.phone}</td>
-					<td><fmt:formatDate value="${memberVO.indate}" /></td>
+					<td>${memberVO.indate}</td>
+				<c:choose>
+					<c:when test='${memberVO.useyn=="n"}'>
+						<td><input type="button" value="탈퇴" onclick="go_member_total_delete('${memberVO.id}')"/>
+						<input type="hidden" name="id"/></td>
+					</c:when>
+				</c:choose>
 				</tr>
 			</c:forEach>
 		</table>
