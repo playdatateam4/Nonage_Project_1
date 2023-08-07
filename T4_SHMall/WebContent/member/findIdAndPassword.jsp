@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="script/findMemberIdAndPassword.js"></script>
@@ -10,15 +10,15 @@
 	<form name="findId">
 	<table>
 	<tr>
-		<td align="right"><label> �̸�</label></td>
+		<td align="right"><label> 이름</label></td>
 		<td><input type="text" name="name" value=""></td>
 	</tr>	
 	<tr>
-		<td align="right"><label> �̸���</label></td>
+		<td align="right"><label> 이메일</label></td>
 		<td><input type="text" name="email" value=""></td>
 	</tr>
 	<tr>
-		<td align="center" colspan="2"><input type="button" value="���̵� ã��" onclick="findMemberId()"></td>
+		<td align="center" colspan="2"><input type="button" value="아이디 찾기" onclick="findMemberId()"></td>
 	</tr>
 	</table>
 	</form>
@@ -28,19 +28,19 @@
 	<form name="findPW">
 	<table>
 	<tr>
-		<td align="right"><label> ���̵�</label></td>
+		<td align="right"><label> 아이디</label></td>
 		<td><input type="text" name="memberId" value=""></td>
 	</tr>	
 	<tr>
-		<td align="right"><label> �̸�</label></td>
+		<td align="right"><label> 이름</label></td>
 		<td><input type="text" name="name" value=""></td>
 	</tr>	
 	<tr>
-		<td align="right"><label> �̸���</label></td>
+		<td align="right"><label> 이메일</label></td>
 		<td><input type="text" name="email" value=""></td>
 	</tr>
 	<tr>
-		<td align="center" colspan="2"><input type="button" value="��й�ȣ ã��" onclick="findPassword()"></td>
+		<td align="center" colspan="2"><input type="button" value="비밀번호 찾기" onclick="findPassword()"></td>
 	</tr>
 	</table>
 	</form>

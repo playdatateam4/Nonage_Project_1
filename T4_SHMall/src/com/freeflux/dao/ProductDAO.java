@@ -345,7 +345,7 @@ public class ProductDAO {
 	}
 	
 	public int deleteProduct(String pseq) {
-		String sql = "delete from product where pseq=?";
+		String sql = "Update product set deleted='O' where PSEQ=?";
 		int result = -1;
 		
 		Connection con = null;

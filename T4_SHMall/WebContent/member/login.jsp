@@ -15,11 +15,11 @@
         </fieldset>
         <div class="clear"></div>
         <div id="buttons">
-            <input type="submit" value="로그인" class="submit" style="cursor: pointer;">
-            <input type="button" value="회원가입" class="cancel" style="cursor: pointer;"
-                 onclick="location='NonageServlet?command=join_form'">
-            <input type="button" value="아이디 비밀번호 찾기" class="submit" style="cursor: pointer;"
-                 onclick="location='NonageServlet?command=find_id_form'">     
+            <input type="submit" value="로그인" class="submit">
+            <input type="button" value="회원가입" class="cancel"
+                 onclick="location='NonageServlet?command=contract'">
+            <input type="button" value="아이디 비밀번호 찾기" class="submit"
+                 onclick="location='NonageServlet?command=find_id_pwd_form'">     
         </div>
     </form>  
   </article>

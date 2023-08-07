@@ -4,24 +4,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.freeflux.dao.MemberDAO;
 
-@WebServlet("/changePassword")
-public class ChangePasswordAction extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class ChangePasswordAction implements Action {
        
-    public ChangePasswordAction() {
-        super();
-    }
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 	String userId = request.getParameter("userId");
+	@Override
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			String userId = request.getParameter("userId");
 		    String newPwd = request.getParameter("newPwd");
 		    
 		    MemberDAO memberDAO = MemberDAO.getInstance();
