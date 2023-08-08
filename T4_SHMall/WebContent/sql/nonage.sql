@@ -174,19 +174,21 @@
 	-- 베스트 상품
 	create or replace view best_pro_view
 	as
-	select pseq, name, price2, image 
-	from( select rownum, pseq, name, price2, image 
+	select pseq, name, price2, image, deleted
+	from( select rownum, pseq, name, price2, image, deleted
 	      from product  
-	      where bestyn='y' 
+	      where bestyn='y'
+          and deleted='X'
 	      order by indate desc)
 	where  rownum <=4;
 	
 	-- 신상품
 	create or replace view new_pro_view
 	as
-	select pseq, name, price2, image 
-	from( select rownum, pseq, name, price2, image 
+	select pseq, name, price2, image, deleted
+	from( select rownum, pseq, name, price2, image, deleted 
 	      from product  
 	      where useyn='y' 
+          and deleted='X'
 	      order by indate desc)
 	where  rownum <=4;
