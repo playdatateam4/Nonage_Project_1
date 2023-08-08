@@ -75,10 +75,11 @@
 					</li>
 					<li><a href="NonageServlet?command=catagory&kind=3">Sandals</a>
 					</li>
-					<li><a href="NonageServlet?command=catagory&kind=4">Sneakers</a>
+					<li><a href="NonageServlet?command=catagory&kind=4">Slippers</a>
 					</li>
-					<li><a href="NonageServlet?command=catagory&kind=5">On
-							Sale</a></li>
+					<li><a href="NonageServlet?command=catagory&kind=5">Sneakers</a>
+					</li>
+					<li><a href="NonageServlet?command=catagory&kind=6">On Sale</a></li>
 				</ul>
 			</nav>
 			<div class="clear"></div>
