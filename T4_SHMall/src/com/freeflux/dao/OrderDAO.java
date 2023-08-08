@@ -161,6 +161,7 @@ public class OrderDAO {
 			while(rs.next()) {
 				if(rs.getInt(1)>0) { //oseq=rs.getInt(1)를 가진 레코드를 하나 이상 가지고 있다는 의미
 					answer = true;
+					break;
 				}else {
 					//모든 레코드를 순회해도 oseq=rs.getInt(1)를 가진 레코드가 없다는 의미이다.
 					answer = false;
