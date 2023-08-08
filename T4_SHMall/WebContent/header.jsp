@@ -3,7 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
+
+<%
+  request.setCharacterEncoding("UTF-8");
+%>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
 <!DOCTYPE html>
 <html>
@@ -21,7 +25,7 @@
 		<header>
 			<!--로고 들어가는 곳 시작--->
 			<div id="logo">
-				<a href="NonageServlet?command=index"> <img
+				<a href="${contextPath}/main"> <img
 					src="images/logo.gif" width="180" height="100" alt="nonageshop">
 				</a>
 			</div>
@@ -30,17 +34,17 @@
 				<ul>
 					<c:choose>
 						<c:when test="${empty sessionScope.loginUser}">
-							<li><a href="NonageServlet?command=login_form"
+							<li><a href="${contextPath}/main/login_form.do"
 								style="width: 110px;">LOGIN</a> 
 							</li>
 							<li>/</li>
-							<li><a href="NonageServlet?command=contract">JOIN</a></li>
+							<li><a href="${contextPath}/main/contract.do">JOIN</a></li>
 							<li>/</li>
-							<li><a href="NonageServlet?command=cart_list">CART</a></li>
+							<li><a href="${contextPath}/main/cart_list.do">CART</a></li>
 							<li>/</li>
-							<li><a href="NonageServlet?command=mypage&from=menu">MY PAGE</a></li>
+							<li><a href="${contextPath}/main/mypage.do">MY PAGE</a></li>
 							<li>/</li>
-							<li><a href="NonageServlet?command=qna_list">Q&amp;A(1:1)</a>
+							<li><a href="${contextPath}/main/qna_list.do">Q&amp;A(1:1)</a>
 							</li>
 						</c:when>
 						<c:when test="${sessionScope.loginUser.logType eq 'worker'}">
@@ -54,13 +58,13 @@
 						<c:otherwise>
 							<li style="color: orange">
 								${sessionScope.loginUser.name}(${sessionScope.loginUser.id})</li>
-							<li><a href="NonageServlet?command=logout">LOGOUT</a></li>
+							<li><a href="${contextPath}/main/logout.do">LOGOUT</a></li>
 							<li>/</li>
-							<li><a href="NonageServlet?command=cart_list">CART</a></li>
+							<li><a href="${contextPath}/main/cart_list.do"">CART</a></li>
 							<li>/</li>
-							<li><a href="NonageServlet?command=mypage&from=menu">MY PAGE</a></li>
+							<li><a href="${contextPath}/main/mypage.do">MY PAGE</a></li>
 							<li>/</li>
-							<li><a href="NonageServlet?command=qna_list">Q&amp;A(1:1)</a>
+							<li><a href="${contextPath}/main/qna_list.do">Q&amp;A(1:1)</a>
 							</li>
 						</c:otherwise>
 					</c:choose>
@@ -69,15 +73,15 @@
 
 			<nav id="top_menu">
 				<ul>
-					<li><a href="NonageServlet?command=catagory&kind=1">Heels</a>
+					<li><a href="${contextPath}/main/catagory.do?kind=1">Heels</a>
 					</li>
-					<li><a href="NonageServlet?command=catagory&kind=2">Boots</a>
+					<li><a href="${contextPath}/main/catagory.do?kind=2">Boots</a>
 					</li>
-					<li><a href="NonageServlet?command=catagory&kind=3">Sandals</a>
+					<li><a href="${contextPath}/main/catagory.do?kind=3">Sandals</a>
 					</li>
-					<li><a href="NonageServlet?command=catagory&kind=4">Sneakers</a>
+					<li><a href="${contextPath}/main/catagory.do?kind=4">Sneakers</a>
 					</li>
-					<li><a href="NonageServlet?command=catagory&kind=5">On
+					<li><a href="${contextPath}/main/catagory.do?kind=5">On
 							Sale</a></li>
 				</ul>
 			</nav>
