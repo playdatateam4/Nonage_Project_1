@@ -80,6 +80,10 @@ public class ActionFactory {
 			action = new FindPasswordAction();
 		} else if (command.equals("change_pwd")) {
 			action = new ChangePasswordAction();
+		} else if (command.equals("qna_mod_form")) {
+			action = new QnaModifyFormAction();
+		} else if (command.equals("qna_mod")) {
+			action = new QnaModifyAction();
 		}
 
 		// admin

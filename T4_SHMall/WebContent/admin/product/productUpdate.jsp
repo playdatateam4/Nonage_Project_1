@@ -65,6 +65,10 @@
 							<input type="checkbox" name="useyn" value="n">
 						</c:otherwise>
 					</c:choose></td>
+				<th>재고</th>
+				<td width="72">
+					<input type="text" name="inventory" size="11" placeholder="0" onBlur="go_ab()" onKeyUp='NumFormat(this)'>
+				</td>
 			</tr>
 			<tr>
 				<th>상세설명</th>
