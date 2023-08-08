@@ -29,8 +29,6 @@
       <div id="buttons" style="float:right">
       <input type="button"  value="1:1 질문하기"  class="submit"    
 onclick="location.href='NonageServlet?command=qna_write_form'"> 
-      <input type="button"    value="쇼핑 계속하기"  class="cancel"  
-onclick="location.href='NonageServlet?command=index'">  
       </div>
     </form>
   </article>
