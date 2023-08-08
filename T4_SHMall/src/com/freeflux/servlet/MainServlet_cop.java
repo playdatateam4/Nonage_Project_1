@@ -34,8 +34,8 @@ import com.freeflux.dto.MemberVO;
 import com.freeflux.dto.OrderVO;
 import com.freeflux.dto.ProductVO;
 
-@WebServlet("/main/*")
-public class AdminServlet extends HttpServlet {
+//@WebServlet("/main/*")
+public class MainServlet_cop extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	ProductVO productVO;
@@ -119,7 +119,7 @@ public class AdminServlet extends HttpServlet {
 
 			if (action == null) {
 
-				nextPage = "/index.jsp";
+				nextPage = "/main/index.do";
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 				dispatch.forward(request, response);
 				
@@ -139,98 +139,6 @@ public class AdminServlet extends HttpServlet {
 				}
 				
 			}
-//			} else if (action.equals("/OrderAllAction.do")) {
-//				MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-//				
-//				if (loginUser == null) {
-//					nextPage = "/index.jsp";
-//				
-//				} else {				
-//					ArrayList<Integer> oseqList =orderPageService.SelectSeq(loginUser.getId());
-//					ArrayList<OrderVO> orderList = new ArrayList<OrderVO>();
-//						
-//				for(int oseq : oseqList) {
-//					ArrayList<OrderVO> orderListIng = orderPageService.OrderAllAction(loginUser.getId(), "%", oseq);
-//				
-//					OrderVO orderVO = orderListIng.get(0);
-//					orderVO.setPname(orderVO.getPname() + " 외 " + orderListIng.size() + "건");
-//					
-//					// 확인용 코드
-//					System.out.println(orderVO.getIndate());
-//
-//					int totalPrice = 0;
-//					for (OrderVO ovo : orderListIng) {
-//						totalPrice += ovo.getPrice2() * ovo.getQuantity();
-//				}
-//					orderVO.setPrice2(totalPrice);
-//					orderList.add(orderVO);
-//				}
-//				request.setAttribute("title", "총 주문 내역");
-//				request.setAttribute("orderList", orderList);
-//				
-//				nextPage = "/mypage/mypage.jsp";
-//				}
-//							
-//			} else if (action.equals("/OrderDetailAction.do")) {
-//				ArrayList<OrderVO> orderList =  orderPageService.OrderDetailAction();
-//				
-//				request.setAttribute("orderList", orderList);
-//				nextPage = "/mypage/mypage.jsp";
-//
-//			} else if (action.equals("/OrderInsertAction.do")) {
-//				MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-//
-//				return;
-//			} else if (action.equals("/OrderListAction.do")) {
-//
-//				OrderDAO orderDAO = OrderDAO.getInstance();
-//				MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-//				ArrayList<Integer> oseqList = orderDAO.selectSeqOrderIng(loginUser.getId());
-//				ArrayList<OrderVO> orderList = new ArrayList<OrderVO>();
-//				for (int oseq : oseqList) {
-//					ArrayList<OrderVO> orderListIng = orderDAO.listOrderById(loginUser.getId(), "%", oseq);
-//
-//					OrderVO orderVO = orderListIng.get(0);
-//					orderVO.setPname(orderVO.getPname() + " 외 " + orderListIng.size() + "건");
-//					System.out.println(orderVO.getIndate());
-//
-//					int totalPrice = 0;
-//					for (OrderVO ovo : orderListIng) {
-//						totalPrice += ovo.getPrice2() * ovo.getQuantity();
-//					}
-//
-//					orderVO.setPrice2(totalPrice);
-//					orderList.add(orderVO);
-//				}
-//				orderList = orderPageService.OrderListAction();
-//				
-//				request.setAttribute("orderList", orderList);
-//				nextPage = "/mypage/orderList.jsp";
-//
-//			} else if (action.equals("/ProductDetailAction.do")) {
-//				String pseq = request.getParameter("pseq").trim();
-//				ProductVO productVO = productPageService.ProductDetailAction(pseq);
-//				
-//				request.setAttribute("productVO", productVO);
-//				nextPage = "/product/productDetail.jsp";
-//
-//			} else if (action.equals("/ProductKindAction.do")) {
-//				String kind = request.getParameter("kind").trim();
-//				ArrayList<ProductVO> productVO = productPageService.productKindAction(kind);
-//		
-//				request.setAttribute("productKindList", productVO);
-//				nextPage = "/product/productKind.jsp";
-//			}else if (action.equals("/LoginFormAction.do")) {
-//				nextPage = "/member/login.jsp";
-//				
-//				String id = request.getParameter("id").trim();
-//				request.setAttribute("id", id);
-//				
-//			
-//			
-//			}
-//			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
-//			dispatch.forward(request, response);
 
 		} catch (Exception e) {
 			System.out.println("컨트롤러 에러" + e.getMessage());
