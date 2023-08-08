@@ -145,6 +145,30 @@ public class OrderDAO {
 		}
 		return oseqList;
 	}
+	
+	// 총 주문 내역 조회 ( 진행 완료인 주문 내역도 띄워 주기 )
+	public ArrayList<Integer> selectTotalSeqOrderIng(String id) {
+		ArrayList<Integer> oseqList = new ArrayList<Integer>();
+		String sql = "select distinct oseq from order_view " + "where id=? order by oseq desc";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				oseqList.add(rs.getInt(1));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt, rs);
+		}
+		return oseqList;
+	}
 
 	/*
 	 * * 관리자 모드에서 사용되는 메소드 * *
