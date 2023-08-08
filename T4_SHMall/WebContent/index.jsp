@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
- 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
 <!--메인 이미지 들어가는 곳 시작 --->
 <div class="clear"></div>
 <div id="main_img">
@@ -18,7 +21,7 @@
 			<div id="item">
 				<a
 					href="NonageServlet?command=product_detail&pseq=${productVO.pseq}">
-					<img src="product_images/${productVO.image}" />
+					<img src="${contextPath}/product_images/${productVO.image}" />
 					<h3>${productVO.name}</h3>
 					<p>${productVO.price2}</p>
 				</a>
@@ -33,7 +36,7 @@
 			<div id="item">
 				<a
 					href="NonageServlet?command=product_detail&pseq=${productVO.pseq}">
-					<img src="product_images/${productVO.image}" />
+					<img src="${contextPath}/product_images/${productVO.image}" />
 					<h3>${productVO.name}</h3>
 					<p>${productVO.price2}</p>
 				</a>

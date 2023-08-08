@@ -86,6 +86,8 @@ public class ActionFactory {
 			action = new QnaModifyFormAction();
 		} else if (command.equals("qna_mod")) {
 			action = new QnaModifyAction();
+		} else if (command.equals("qna_delete")) {
+			action = new QnaDeleteAction();
 		}
 
 		// admin
