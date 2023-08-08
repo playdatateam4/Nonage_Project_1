@@ -2,6 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%
+  request.setCharacterEncoding("UTF-8");
+%>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +23,7 @@
 		<header>
 			<!--로고 들어가는 곳 시작--->
 			<div id="logo">
-				<a href="NonageServlet?command=index"> <img
+				<a href="${contextPath}/main"> <img
 					src="images/logo.gif" width="180" height="100" alt="nonageshop">
 				</a>
 			</div>
@@ -27,9 +32,9 @@
 				<ul>
 					<c:choose>
 						<c:when test="${empty sessionScope.loginUser}">
-							<li><a href="NonageServlet?command=login_form"
+							<li><a href="${contextPath}/main/LoginFormAction.do"
 								style="width: 110px;">LOGIN(CUSTOMER</a> <a
-								href="NonageServlet?command=admin_login_form"
+								href="${contextPath}/main/AdminLoginAction.do"
 								style="width: 100px;">| ADMIN)</a></li>
 							<li>/</li>
 							<li><a href="NonageServlet?command=contract">JOIN</a></li>
@@ -52,15 +57,15 @@
 
 			<nav id="top_menu">
 				<ul>
-					<li><a href="NonageServlet?command=catagory&kind=1">Heels</a>
+					<li><a href="${contextPath}/main/ProductKindAction.do?kind=1">Heels</a>
 					</li>
-					<li><a href="NonageServlet?command=catagory&kind=2">Boots</a>
+					<li><a href="${contextPath}/main/ProductKindAction.do?kind=2">Boots</a>
 					</li>
-					<li><a href="NonageServlet?command=catagory&kind=3">Sandals</a>
+					<li><a href="${contextPath}/main/ProductKindAction.do?kind=3">Sandals</a>
 					</li>
-					<li><a href="NonageServlet?command=catagory&kind=4">Sneakers</a>
+					<li><a href="${contextPath}/main/ProductKindAction.do?kind=4">Sneakers</a>
 					</li>
-					<li><a href="NonageServlet?command=catagory&kind=5">On
+					<li><a href="${contextPath}/main/ProductKindAction.do?kind=5">On
 							Sale</a></li>
 				</ul>
 			</nav>
