@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>  
 <%@ include file="../header.jsp" %>  
-<%@ include file="sub_img.html"%> 
-<%@ include file="sub_menu.jsp" %>       
+<%@ include file="sub_img.html"%>
+<c:choose>
+	<c:when test="${requestScope.from eq 'cart'}">
+		<%@ include file="sub_menu_cart.jsp" %>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="sub_menu_mypage.jsp" %>
+	</c:otherwise>
+</c:choose>
   <article>
     <h2> My Page(${title}) </h2>
     <form name="formm" method="post">

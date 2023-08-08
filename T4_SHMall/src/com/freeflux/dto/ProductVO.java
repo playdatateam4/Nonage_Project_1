@@ -14,10 +14,32 @@ public class ProductVO {
 	private String useyn;
 	private String bestyn;
 	private Timestamp indate;
+	private int inventory;
+	private String deleted;
+	
+
+	public String getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(String deleted) {
+		this.deleted = deleted;
+	}
 
 	public ProductVO() {
 
 	}
+	
+	public int getInventory() {
+		return inventory;
+	}
+
+
+	public void setInventory(int inventory) {
+		this.inventory = inventory;
+	}
+
+
 
 	public int getPseq() {
 		return pseq;

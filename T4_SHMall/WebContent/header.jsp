@@ -3,18 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+
 <%
   request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Nonage Shop</title>
-<link href="css/shopping.css" rel="stylesheet">
-<script type="text/javascript" src="member/member.js"></script>
-<script type="text/javascript" src="mypage/mypage.js"></script>
+<link href="${contextPath}/css/shopping.css" rel="stylesheet">
+<script type="text/javascript" src="${contextPath}/member/member.js"></script>
+<script type="text/javascript" src="${contextPath}/mypage/mypage.js"></script>
 </head>
 
 <body>
@@ -32,26 +34,40 @@
 				<ul>
 					<c:choose>
 						<c:when test="${empty sessionScope.loginUser}">
-							<li><a href="${contextPath}/main//login_form.do"
-								style="width: 110px;">LOGIN(CUSTOMER</a> <a
-								href="${contextPath}/main/admin_login.do"
-								style="width: 100px;">| ADMIN)</a></li>
+							<li><a href="${contextPath}/main/login_form.do"
+								style="width: 110px;">LOGIN</a> 
+							</li>
 							<li>/</li>
 							<li><a href="${contextPath}/main/contract.do">JOIN</a></li>
+							<li>/</li>
+							<li><a href="${contextPath}/main/cart_list.do">CART</a></li>
+							<li>/</li>
+							<li><a href="${contextPath}/main/mypage.do">MY PAGE</a></li>
+							<li>/</li>
+							<li><a href="${contextPath}/main/qna_list.do">Q&amp;A(1:1)</a>
+							</li>
+						</c:when>
+						<c:when test="${sessionScope.loginUser.logType eq 'worker'}">
+							<li style="color: orange">
+								${sessionScope.loginUser.name}(${sessionScope.loginUser.id})</li>
+							<li><a href="NonageServlet?command=logout">LOGOUT</a></li>
+							<li>/</li>
+							<li><a 	href="NonageServlet?command=admin_product_list" 
+									style="margin-left: 9px;">ADMIN PAGE</a></li>
 						</c:when>
 						<c:otherwise>
 							<li style="color: orange">
 								${sessionScope.loginUser.name}(${sessionScope.loginUser.id})</li>
 							<li><a href="${contextPath}/main/logout.do">LOGOUT</a></li>
+							<li>/</li>
+							<li><a href="${contextPath}/main/cart_list.do"">CART</a></li>
+							<li>/</li>
+							<li><a href="${contextPath}/main/mypage.do">MY PAGE</a></li>
+							<li>/</li>
+							<li><a href="${contextPath}/main/qna_list.do">Q&amp;A(1:1)</a>
+							</li>
 						</c:otherwise>
 					</c:choose>
-					<li>/</li>
-					<li><a href="${contextPath}/main/cart_list.do">CART</a></li>
-					<li>/</li>
-					<li><a href="${contextPath}/main/mypage.do">MY PAGE</a></li>
-					<li>/</li>
-					<li><a href="${contextPath}/main/qna_list.do">Q&amp;A(1:1)</a>
-					</li>
 				</ul>
 			</nav>
 

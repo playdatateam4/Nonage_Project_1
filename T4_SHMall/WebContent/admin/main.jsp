@@ -26,7 +26,7 @@
 	<div id="wrap">
 		<header>
 			<div id="logo">
-				<a href="admin/main.jsp"> <img src="admin/images/bar_01.gif"
+				<a href="NonageServlet?command=index"> <img src="admin/images/bar_01.gif"
 					style="float: left"> <img src="admin/images/text.gif">
 				</a>
 			</div>

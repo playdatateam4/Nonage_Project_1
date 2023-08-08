@@ -13,7 +13,7 @@
 		<table id="list">
 			<tr>
 				<th>상품분류</th>
-				<td colspan="5"><select name="kind">
+				<td colspan="6"><select name="kind">
 						<c:forEach items="${kindList}" var="kind" varStatus="status">
 							<c:choose>
 								<c:when test="${productVO.kind==status.count}">
@@ -65,6 +65,10 @@
 							<input type="checkbox" name="useyn" value="n">
 						</c:otherwise>
 					</c:choose></td>
+				<th>재고</th>
+				<td width="72">
+					<input type="text" name="inventory" size="11" placeholder="0" onBlur="go_ab()" onKeyUp='NumFormat(this)'>
+				</td>
 			</tr>
 			<tr>
 				<th>상세설명</th>

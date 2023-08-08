@@ -6,6 +6,7 @@
 <article>
 	<h1>상품 상세 보기</h1>
 	<form name="frm" method="post">
+	<input type="hidden" name="pseq" value="${productVO.pseq}"> 
 		<table id="list">
 			<tr>
 				<th>상품분류</th>
@@ -44,6 +45,9 @@
 		
 		<!--[9] 목록 버튼이 눌리면 상품 리스트 페이지로 이동하되 현재 페이지를 전달해 준다. -->
 		<input class="btn" type="button" value="목록" onClick="go_list('${tpage}')">
+		
+		<!--[10] 삭제 버튼이 눌리면 상품을 삭제하고 다시 리스트로 돌려준다. -->
+		<input class="btn" type="button" value="삭제" onClick="go_mod_delete('${productVO.pseq}')">
 	</form>
 </article>
 <%@ include file="/admin/footer.jsp"%>

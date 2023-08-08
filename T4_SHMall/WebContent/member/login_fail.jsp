@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
 
-<% String login_result=(String)request.getAttribute("login_result"); %>
+<c:set var="login_result" value="${requestScope.login_result}"/>
 
 <script type="text/javascript">
-	var login_result = '<%= login_result %>';
+	var login_result = '${login_result}';
 	if(login_result==="deleted"){
 		alert("탈퇴한 회원입니다. 확인후 다시 로그인해주세요.");
 		history.go(-1);

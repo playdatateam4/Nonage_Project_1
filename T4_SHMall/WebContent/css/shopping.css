@@ -347,3 +347,9 @@ form  .submit {
 form  .cancel {
 	background-image: url(../images/cancel_back.jpg);	
 }
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+	cursor: pointer;
+}

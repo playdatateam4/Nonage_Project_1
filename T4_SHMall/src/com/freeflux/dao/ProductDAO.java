@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
+import com.freeflux.dto.OrderVO;
 import com.freeflux.dto.ProductVO;
 import com.freeflux.util.DBManager;
 
@@ -104,6 +106,7 @@ public class ProductDAO {
 				product.setUseyn(rs.getString("useyn"));
 				product.setBestyn(rs.getString("bestyn"));
 				product.setIndate(rs.getTimestamp("indate"));
+				product.setInventory(rs.getInt("inventory"));
 				
 				System.out.println("useyn : "+rs.getString("useyn"));
 				System.out.println("bestyn : "+rs.getString("bestyn"));
@@ -118,7 +121,7 @@ public class ProductDAO {
 
 	public ArrayList<ProductVO> listKindProduct(String kind) {
 		ArrayList<ProductVO> productList = new ArrayList<ProductVO>();
-		String sql = "select * from product where kind=?";
+		String sql = "select * from product where kind=? and deleted='X'";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -231,9 +234,9 @@ public class ProductDAO {
 	public ArrayList<ProductVO> listProduct(int tpage, String product_name) {
 		ArrayList<ProductVO> productList = new ArrayList<ProductVO>();
 
-		String str = "select pseq, indate, name, price1, price2, useyn, bestyn "
-				+ " from product where name like '%'||?||'%' order by pseq desc";
-
+		String str = "select pseq, indate, name, price1, price2, useyn, bestyn, DELETED "
+		        + " from product where name like '%'||?||'%' order by pseq desc";
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -266,6 +269,7 @@ public class ProductDAO {
 					product.setPrice2(rs.getInt(5));
 					product.setUseyn(rs.getString(6));
 					product.setBestyn(rs.getString(7));
+					product.setDeleted(rs.getString(8));
 					productList.add(product);
 					if (rs.isLast()) {
 						break;
@@ -285,8 +289,8 @@ public class ProductDAO {
 	public int insertProduct(ProductVO product) {
 		int result = 0;
 
-		String sql = "insert into product (" + "pseq, kind, name, price1, price2, price3, content, image) "
-				+ "values(product_seq.nextval, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into product (" + "pseq, kind, name, price1, price2, price3, content, image,inventory) "
+				+ "values(product_seq.nextval, ?, ?, ?, ?, ?, ?, ?,?)";
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -301,6 +305,7 @@ public class ProductDAO {
 			pstmt.setInt(5, product.getPrice3());
 			pstmt.setString(6, product.getContent());
 			pstmt.setString(7, product.getImage());
+			pstmt.setInt(8, product.getInventory());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("추가 실패");
@@ -342,7 +347,7 @@ public class ProductDAO {
 	}
 	
 	public int deleteProduct(String pseq) {
-		String sql = "delete from product where pseq=?";
+		String sql = "Update product set deleted='O' where PSEQ=?";
 		int result = -1;
 		
 		Connection con = null;
@@ -359,5 +364,106 @@ public class ProductDAO {
 			DBManager.close(con, pstmt);
 		}
 		return result;
+	}
+
+	public void deleteMember(String id) {
+		
+		String sql1 = "delete from cart where id=?";
+
+		List<Integer> orderList = selectAllOrder(id);
+		for(int oseq : orderList) {
+			deleteOrderDetail(oseq);
+		}
+		String sql2 = "delete from orders where id=?";
+		String sql3 = "delete from qna where id=?";
+		String sql4 = "delete from member where id=?";
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+	
+		try {
+			con = DBManager.getConnection();
+			
+			pstmt = con.prepareStatement(sql1);
+			pstmt.setString(1,id);
+			pstmt.executeUpdate();
+			
+			pstmt = con.prepareStatement(sql2);
+			pstmt.setString(1,id);
+			pstmt.executeUpdate();
+			
+			pstmt = con.prepareStatement(sql3);
+			pstmt.setString(1,id);
+			pstmt.executeUpdate();
+			
+			pstmt = con.prepareStatement(sql4);
+			pstmt.setString(1,id);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(con, pstmt);
+		}
+		
+	}
+	
+	public void deleteOrderDetail(int oseq) {
+		String sql ="delete from order_detail where oseq=?";
+		boolean result=false;
+		
+		Connection con=null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.getConnection();
+			
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, oseq);
+			result=pstmt.execute();
+			
+			if(result) {
+				System.out.println("Delete from order_detail => SUCCESS");
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Delete from order_detail => FAIL");
+			System.out.println(e.getMessage());
+		} finally {
+			DBManager.close(con, pstmt);
+		}
+	}
+	
+	public List selectAllOrder(String id) {
+		String query = "select oseq from orders where id=?";
+		
+		Connection con=null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		List<Integer> orderList = new ArrayList<>();
+		
+		try {
+			
+			con= DBManager.getConnection();
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int oseq = rs.getInt("oseq");
+				orderList.add(oseq);
+			}
+			
+			if(orderList.size() > 0) {
+				System.out.println("select All Order => SUCCESS");
+			}
+		} catch (SQLException e) {
+			System.out.println("select All Order => FAIL");
+			System.out.println(e.getMessage());
+		} finally {
+			DBManager.close(con, pstmt);
+		}
+		
+		return orderList;
 	}
 }

@@ -11,35 +11,40 @@
 		<table id="list">
 			<tr>
 				<th>상품분류</th>
-				<td colspan="5"><select name="kind">
+				<td colspan="7"><select name="kind" required>
+						<option value="" disabled selected>필수선택</option>
 						<c:forEach items="${kindList}" var="kind" varStatus="status">
 							<option value="${status.count}">${kind}</option>
 						</c:forEach>
 				</select>
 			<tr>
 				<th>상품명</th>
-				<td width="343" colspan="5">
-					<input type="text" name="name" size="47" maxlength="100" value="킬힐">
+				<td width="180" colspan="3">
+					<input type="text" name="name" size="47" maxlength="100">
+				</td>
+				<th>재고</th>
+				<td width="72">
+					<input type="text" name="inventory" size="11" placeholder="0" onBlur="go_ab()" onKeyUp='NumFormat(this)'>
 				</td>
 			</tr>
 			<tr>
 				<th>원가[A]</th>
 				<td width="70">
-					<input type="text" name="price1" size="11" onKeyUp='NumFormat(this)' value="10000">
+					<input type="text" name="price1" size="11" placeholder="0" onKeyUp='NumFormat(this)'>
 				</td>
 				<th>판매가[B]</th>
 				<td width="70">
-					<input type="text" name="price2" size="11" onBlur="go_ab()" onKeyUp='NumFormat(this)' value="20000">
+					<input type="text" name="price2" size="11" onBlur="go_ab()" placeholder="0" onKeyUp='NumFormat(this)'>
 				</td>
 				<th>[B-A]</th>
 				<td width="72">
-					<input type="text" name="price3" size="11" readonly onKeyUp='NumFormat(this)'>
+					<input type="text" name="price3" size="11" placeholder="0" onKeyUp='NumFormat(this)' readonly>
 				</td>
 			</tr>
 
 			<tr>
 				<th>상세설명</th>
-				<td colspan="5"><textarea name="content" rows="8" cols="70">이뻐요</textarea>
+				<td colspan="5"><textarea name="content" rows="8" cols="70"></textarea>
 				</td>
 			</tr>
 			<tr>
