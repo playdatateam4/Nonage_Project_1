@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/admin/header.jsp"%>
 <%@ include file="/admin/sub_menu.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>
 <script type="text/javascript">
 	function go_list() {
 		var theForm = document.frm;
@@ -39,7 +43,7 @@
 				<table id="orderList">
 					<tr>
 						<td colspan="2">
-							<img src="admin/images/opinionimg01.gif">
+							<img src="${contextPath}/admin/images/opinionimg01.gif">
 						</td>
 					</tr>
 					<tr>

@@ -2,7 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/admin/header.jsp"%>
 <%@ include file="/admin/sub_menu.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>  
 <article>
 	<h1>상품수정</h1>
 	<form name="frm" method="post" enctype="multipart/form-data">
@@ -75,7 +78,7 @@
 			<tr>
 				<th>상품이미지</th>
 				<td colspan="5">
-					<img src="product_images/${productVO.image}" width="200pt"> <br> 
+					<img src="${contextPath}/product_images/${productVO.image}" width="200pt"> <br> 
 					<input type="file" name="image">
 				</td>
 			</tr>
