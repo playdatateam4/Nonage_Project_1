@@ -1,3 +1,12 @@
+function delete_order(){
+	
+	 if(confirm("삭제하시겠습니까?")){
+			alert("결제 중 상품이 삭제되었습니다.");
+		    document.formm.action = "NonageServlet?command=order_delete";
+		    document.formm.submit();
+	 }
+	  
+}
 function go_cart() {
   if (document.formm.quantity.value == "") {
     alert("수량을 입력하여 주세요.");

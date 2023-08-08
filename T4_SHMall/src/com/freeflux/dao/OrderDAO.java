@@ -3,6 +3,7 @@ package com.freeflux.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.freeflux.dto.CartVO;
@@ -121,6 +122,59 @@ public class OrderDAO {
 		}
 		return orderList;
 	}
+	
+	//사용자가 결제 중인 상품 삭제
+	public void deleteOrder(String oseq, String odseq) {
+		String sql = "delete from order_detail where oseq=? and odseq=?";
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, oseq);
+			pstmt.setString(2, odseq);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQLException in deleteOrder : "+e.getMessage());
+		}finally {
+			DBManager.close(con, pstmt);
+		}
+	}
+	
+	//order_detail 테이블을 체크해서 oseq=?를 가진 레코드가 하나라도 있으면(주문이 빈 것이 아니므로) 참 리턴한다.
+	public boolean checkIsOrder_detail_is_Empty(String oseq) {
+		String sql = "SELECT COUNT(*) FROM order_detail WHERE oseq = ?";
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Boolean answer = null;
+		
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,oseq);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				if(rs.getInt(1)>0) { //oseq=rs.getInt(1)를 가진 레코드를 하나 이상 가지고 있다는 의미
+					answer = true;
+				}else {
+					//모든 레코드를 순회해도 oseq=rs.getInt(1)를 가진 레코드가 없다는 의미이다.
+					answer = false;
+				}
+			}
+		} catch (SQLException e) {
+			System.out.println("SQLException in checkIsOrder_detail_is_Empty : "+e.getMessage());
+		}finally {
+			DBManager.close(con, pstmt ,rs);
+		}
+				
+		return answer;
+	}
+	
 
 	// 현재 진행 중인 주문 내역만 조회
 	public ArrayList<Integer> selectSeqOrderIng(String id) {
@@ -253,4 +307,5 @@ public class OrderDAO {
 			DBManager.close(conn, pstmt2);
 		}
 	}
+	
 }
