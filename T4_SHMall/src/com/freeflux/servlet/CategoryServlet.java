@@ -66,13 +66,34 @@ public class CategoryServlet extends HttpServlet {
 		HttpSession session;
 		String path = request.getPathInfo();
 		System.out.println("action:" + path);
+		String kind="1";
 		
 		Action action=null;
 	
 		try {
 			if (path == null) {
+				kind = "1";
+				request.setAttribute("kind", kind);
 				action= new ProductKindAction();
 			}else if(path.equals("/heels")) {
+				kind = "1";
+				request.setAttribute("kind", kind);
+				action= new ProductKindAction();
+			}else if(path.equals("/boots")) {
+				kind = "2";
+				request.setAttribute("kind", kind);
+				action= new ProductKindAction();
+			}else if(path.equals("/sandals")) {
+				kind = "3";
+				request.setAttribute("kind", kind);
+				action= new ProductKindAction();
+			}else if(path.equals("/sneakers")) {
+				kind = "4";
+				request.setAttribute("kind", kind);
+				action= new ProductKindAction();
+			}else if(path.equals("/onsale")) {
+				kind = "5";
+				request.setAttribute("kind", kind);
 				action= new ProductKindAction();
 			}
 			

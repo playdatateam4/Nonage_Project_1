@@ -73,15 +73,15 @@
 
 			<nav id="top_menu">
 				<ul>
-					<li><a href="${contextPath}/category/heels?kind=1">Heels</a>
+					<li><a href="${contextPath}/category/heels">Heels</a>
 					</li>
-					<li><a href="${contextPath}/main/catagory.do?kind=2">Boots</a>
+					<li><a href="${contextPath}/category/boots">Boots</a>
 					</li>
-					<li><a href="${contextPath}/main/catagory.do?kind=3">Sandals</a>
+					<li><a href="${contextPath}/category/sandals">Sandals</a>
 					</li>
-					<li><a href="${contextPath}/main/catagory.do?kind=4">Sneakers</a>
+					<li><a href="${contextPath}/category/sneakers">Sneakers</a>
 					</li>
-					<li><a href="${contextPath}/main/catagory.do?kind=5">On
+					<li><a href="${contextPath}/category/onsale">On
 							Sale</a></li>
 				</ul>
 			</nav>

@@ -17,7 +17,7 @@ public class ProductKindAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = "/product/productKind.jsp";
 
-		String kind = request.getParameter("kind").trim();
+		String kind = (String) request.getAttribute("kind");
 
 		ProductDAO productDAO = ProductDAO.getInstance();
 		ArrayList<ProductVO> productKindList = productDAO.listKindProduct(kind);
