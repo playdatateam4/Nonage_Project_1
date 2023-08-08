@@ -365,7 +365,7 @@ public class ProductDAO {
 		}
 		return result;
 	}
-
+	//멤버 테이블 및 연관 테이블에서 제거 
 	public void deleteMember(String id) {
 		
 		String sql1 = "delete from cart where id=?";
