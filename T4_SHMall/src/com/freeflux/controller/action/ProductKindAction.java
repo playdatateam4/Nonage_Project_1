@@ -15,7 +15,7 @@ public class ProductKindAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "product/productKind.jsp";
+		String url = "/product/productKind.jsp";
 
 		String kind = request.getParameter("kind").trim();
 
@@ -24,6 +24,7 @@ public class ProductKindAction implements Action {
 
 		request.setAttribute("productKindList", productKindList);
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+		
 		dispatcher.forward(request, response);
 	}
 }

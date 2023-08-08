@@ -34,8 +34,8 @@ import com.freeflux.dto.MemberVO;
 import com.freeflux.dto.OrderVO;
 import com.freeflux.dto.ProductVO;
 
-@WebServlet("/main/*")
-public class MainServlet extends HttpServlet {
+@WebServlet("/category/*")
+public class CategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ProductVO productVO;
 	OrderVO orderVO;
@@ -71,10 +71,8 @@ public class MainServlet extends HttpServlet {
 	
 		try {
 			if (path == null) {
-				action= new IndexAction();
-			}else if(path.equals("/index")) {
-				action= new IndexAction();
-			}else if(path.equals("/category")) {
+				action= new ProductKindAction();
+			}else if(path.equals("/heels")) {
 				action= new ProductKindAction();
 			}
 			

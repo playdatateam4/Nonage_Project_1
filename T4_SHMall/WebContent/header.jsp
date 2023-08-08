@@ -73,7 +73,7 @@
 
 			<nav id="top_menu">
 				<ul>
-					<li><a href="${contextPath}/main/catagory.do?kind=1">Heels</a>
+					<li><a href="${contextPath}/category/heels?kind=1">Heels</a>
 					</li>
 					<li><a href="${contextPath}/main/catagory.do?kind=2">Boots</a>
 					</li>
