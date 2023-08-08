@@ -2,7 +2,7 @@
   pageEncoding="UTF-8"%>  
 <%@ include file="../header.jsp" %>  
 <%@ include file="sub_img.html"%> 
-<%@ include file="sub_menu.jsp" %>       
+<%@ include file="sub_menu_cart.jsp" %>       
   <article>
     <h2> Cart List </h2>
     <form name="formm" method="post">

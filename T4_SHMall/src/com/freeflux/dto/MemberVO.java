@@ -12,6 +12,7 @@ public class MemberVO {
 	private String phone;
 	private String useyn;
 	private Timestamp indate;
+	private final String logType="member";
 
 	public MemberVO() {
 
@@ -87,5 +88,9 @@ public class MemberVO {
 
 	public void setIndate(Timestamp indate) {
 		this.indate = indate;
+	}
+
+	public String getLogType() {
+		return logType;
 	}
 }

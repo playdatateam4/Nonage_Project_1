@@ -95,6 +95,25 @@ public class QnaDAO {
 			DBManager.close(conn, pstmt);
 		}
 	}
+	// 답변 대기 중인 QnA 수정 기능 추가
+	public void modifyqna(QnaVO qnaVO) {
+		String sql = "update qna set subject=?, content=? where qseq='1'";
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, qnaVO.getSubject());
+			pstmt.setString(2, qnaVO.getContent());
+			pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(con, pstmt);
+		}
+	}
 
 	/*
 	 * * 관리자 모드에서 필요한 메소드

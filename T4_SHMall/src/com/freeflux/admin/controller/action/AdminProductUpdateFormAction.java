@@ -31,7 +31,7 @@ public class AdminProductUpdateFormAction implements Action {
 		}
 		request.setAttribute("tpage", tpage);
 
-		String kindList[] = { "Heels", "Boots", "Sandals", "Slipers", "Shcakers", "Sale" };
+		String kindList[] = { "Heels", "Boots", "Sandals", "Slipers","Sneakers", "Sale" };
 		request.setAttribute("kindList", kindList);
 
 		request.getRequestDispatcher(url).forward(request, response);

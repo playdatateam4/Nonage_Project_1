@@ -104,6 +104,7 @@ public class ProductDAO {
 				product.setUseyn(rs.getString("useyn"));
 				product.setBestyn(rs.getString("bestyn"));
 				product.setIndate(rs.getTimestamp("indate"));
+				product.setInventory(rs.getInt("inventory"));
 				
 				System.out.println("useyn : "+rs.getString("useyn"));
 				System.out.println("bestyn : "+rs.getString("bestyn"));
@@ -118,7 +119,7 @@ public class ProductDAO {
 
 	public ArrayList<ProductVO> listKindProduct(String kind) {
 		ArrayList<ProductVO> productList = new ArrayList<ProductVO>();
-		String sql = "select * from product where kind=?";
+		String sql = "select * from product where kind=? and deleted='X'";
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -231,9 +232,9 @@ public class ProductDAO {
 	public ArrayList<ProductVO> listProduct(int tpage, String product_name) {
 		ArrayList<ProductVO> productList = new ArrayList<ProductVO>();
 
-		String str = "select pseq, indate, name, price1, price2, useyn, bestyn "
-				+ " from product where name like '%'||?||'%' order by pseq desc";
-
+		String str = "select pseq, indate, name, price1, price2, useyn, bestyn, DELETED "
+		        + " from product where name like '%'||?||'%' order by pseq desc";
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -266,6 +267,7 @@ public class ProductDAO {
 					product.setPrice2(rs.getInt(5));
 					product.setUseyn(rs.getString(6));
 					product.setBestyn(rs.getString(7));
+					product.setDeleted(rs.getString(8));
 					productList.add(product);
 					if (rs.isLast()) {
 						break;
@@ -285,8 +287,8 @@ public class ProductDAO {
 	public int insertProduct(ProductVO product) {
 		int result = 0;
 
-		String sql = "insert into product (" + "pseq, kind, name, price1, price2, price3, content, image) "
-				+ "values(product_seq.nextval, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into product (" + "pseq, kind, name, price1, price2, price3, content, image,inventory) "
+				+ "values(product_seq.nextval, ?, ?, ?, ?, ?, ?, ?,?)";
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -301,6 +303,7 @@ public class ProductDAO {
 			pstmt.setInt(5, product.getPrice3());
 			pstmt.setString(6, product.getContent());
 			pstmt.setString(7, product.getImage());
+			pstmt.setInt(8, product.getInventory());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("추가 실패");
@@ -342,7 +345,7 @@ public class ProductDAO {
 	}
 	
 	public int deleteProduct(String pseq) {
-		String sql = "delete from product where pseq=?";
+		String sql = "Update product set deleted='O' where PSEQ=?";
 		int result = -1;
 		
 		Connection con = null;
@@ -359,5 +362,47 @@ public class ProductDAO {
 			DBManager.close(con, pstmt);
 		}
 		return result;
+	}
+
+	public void deleteMember(String id) {
+		
+		String sql4 = "delete from member where id=?";
+		String sql1 = "delete from cart where id=?";
+		String sql2 = "delete from orders where id=?";
+		String sql3 = "delete from qna where id=?";
+		
+		Connection con = null;
+		PreparedStatement pstmt4 = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+	
+		try {
+			con = DBManager.getConnection();
+			
+			pstmt1 = con.prepareStatement(sql1);
+			pstmt1.setString(1,id);
+			pstmt1.executeUpdate();
+			
+			pstmt2 = con.prepareStatement(sql2);
+			pstmt2.setString(1,id);
+			pstmt2.executeUpdate();
+			
+			pstmt3 = con.prepareStatement(sql3);
+			pstmt3.setString(1,id);
+			pstmt3.executeUpdate();
+			
+			pstmt4 = con.prepareStatement(sql4);
+			pstmt4.setString(1,id);
+			pstmt4.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(con, pstmt1);
+			DBManager.close(con, pstmt2);
+			DBManager.close(con, pstmt3);
+			DBManager.close(con, pstmt4);
+		}
+		
 	}
 }

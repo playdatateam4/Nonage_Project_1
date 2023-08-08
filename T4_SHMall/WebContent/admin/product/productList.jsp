@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/admin/header.jsp"%>
 <%@ include file="/admin/sub_menu.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <article>
 	<h1>상품리스트</h1>
@@ -37,14 +38,15 @@
 							<td height="23" align="center">${productVO.pseq}</td>
 							<td style="text-align: left; padding-left: 50px; padding-right: 0px;">
 								<a href="#" onClick="go_detail('${tpage}', '${productVO.pseq}')">
-									${productVO.name} 
+									${productVO.name}
+									<c:if test="${productVO.deleted eq 'O'}">(삭제 처리 완료)</c:if>
 								</a>
 							</td>
 							<td><fmt:formatNumber value="${productVO.price1}" /></td>
 							<td><fmt:formatNumber value="${productVO.price2}" /></td>
 							<td><fmt:formatDate value="${productVO.indate}" /></td>
 							<td><c:choose>
-									<c:when test='${productVO.useyn=="1"}'>미사용</c:when>
+									<c:when test='${productVO.useyn=="n"}'>미사용</c:when>
 									<c:otherwise>사용</c:otherwise>
 								</c:choose></td>
 						</tr>

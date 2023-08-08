@@ -195,4 +195,81 @@ public class MemberDAO {
 		}
 		return memberList;
 	}
+
+	// 이름과 이메일로 아이디 찾기
+		public String find_id(String userName, String userEmail) {
+			String sql = "select id from member where name=? and email=?";
+			// db 연동
+			Connection conn = null;
+			// 쿼리문 수행
+			PreparedStatement pstmt = null;
+			// 결과 값 저장
+			ResultSet rs = null;
+			// 찾을 아이디
+			String id = null;
+			try {
+				conn = DBManager.getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userName);
+				pstmt.setString(2, userEmail);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					id = rs.getString("id");
+					}
+				DBManager.close(conn, pstmt, rs);
+			} catch (Exception e) {
+			}
+			return id;
+		}
+		// 아이디, 이름, 이메일로 비밀번호 찾기
+		public String find_pwd(String userID, String userName, String userEmail) {
+			String sql = "select pwd from member where id=? and name=? and email=?";
+			// db 연동
+			Connection conn = null;
+			// 쿼리문 수행
+			PreparedStatement pstmt = null;
+			// 결과 값 저장
+			ResultSet rs = null;
+			// 찾을 비밀번호
+			String pwd = null;
+			try {
+				conn = DBManager.getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userID);
+				pstmt.setString(2, userName);
+				pstmt.setString(3, userEmail);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					pwd = rs.getString("pwd");
+					}
+				DBManager.close(conn, pstmt, rs);
+			} catch (Exception e) {
+			}
+			return pwd;
+		}
+		// 비밀번호 재설정
+		public boolean change_pwd(String userId, String newPwd) {
+			String sql = "update member set pwd=? where id=?";
+			// db 연동
+			Connection conn = null;
+			// 쿼리문 수행
+			PreparedStatement pstmt = null;
+			
+			try {
+				conn = DBManager.getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, userId);
+				pstmt.setString(2, newPwd);
+				int rowsUpdated = pstmt.executeUpdate();
+		        if (rowsUpdated > 0) {
+		            // 비밀번호 변경이 성공했으므로 true 반환
+		            return true;
+		        }
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+			}finally {
+				DBManager.close(conn, pstmt);
+			}
+			return false;
+		}
 }

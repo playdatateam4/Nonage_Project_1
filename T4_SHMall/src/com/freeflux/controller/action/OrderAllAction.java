@@ -24,7 +24,7 @@ public class OrderAllAction implements Action {
 			url = "NonageServlet?command=login_form";
 		} else {
 			OrderDAO orderDAO = OrderDAO.getInstance();
-			ArrayList<Integer> oseqList = orderDAO.selectSeqOrderIng(loginUser.getId());
+			ArrayList<Integer> oseqList = orderDAO.selectTotalSeqOrderIng(loginUser.getId());
 
 			ArrayList<OrderVO> orderList = new ArrayList<OrderVO>();
 

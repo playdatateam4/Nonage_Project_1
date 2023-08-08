@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>  
 <%@ include file="../header.jsp" %>   
 <%@ include file="sub_img.html"%> 
-<%@ include file="sub_menu.jsp" %>   
+<%@ include file="sub_menu_mypage.jsp" %>   
   <article>
     <h2>Modify User Information</h2>
     <form id="join" action="NonageServlet?command=join" method="post" name="formm">

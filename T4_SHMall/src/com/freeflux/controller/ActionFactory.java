@@ -72,6 +72,18 @@ public class ActionFactory {
 			action = new QnaWriteAction();
 		} else if (command.equals("qna_view")) {
 			action = new QnaViewAction();
+		}  else if (command.equals("find_id_pwd_form")) {
+			action = new FindIdPwdAction();
+		} else if (command.equals("find_id")) {
+			action = new FindIdAction();
+		} else if (command.equals("find_pwd")) {
+			action = new FindPasswordAction();
+		} else if (command.equals("change_pwd")) {
+			action = new ChangePasswordAction();
+		} else if (command.equals("qna_mod_form")) {
+			action = new QnaModifyFormAction();
+		} else if (command.equals("qna_mod")) {
+			action = new QnaModifyAction();
 		}
 
 		// admin
@@ -105,9 +117,13 @@ public class ActionFactory {
 			action = new AdminQnaDetailAction();
 		} else if (command.equals("admin_qna_repsave")) {
 			action = new AdminQnaResaveAction();
-		}else if (command.equals("admin_product_delete")) {
+		} else if (command.equals("admin_product_delete")) {
 			action = new AdminProductDeleteAction();
 		}
+		else if (command.equals("admin_member_withdrawl")) {
+			action = new AdminMemberDeleteAction();
+		}
+		
 		return action;
 	}
 }
