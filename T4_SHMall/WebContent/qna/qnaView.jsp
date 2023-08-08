@@ -30,7 +30,7 @@
      <div id="buttons" style="float:right">
       <input type="button"  value="목록보기"     class="submit"  onclick="location.href='NonageServlet?command=qna_list'"> 
       <c:if test="${qnaVO.qseq eq '1'}">
-      <input type="button"  value="수정하기"  class="cancel"  onclick="location.href='NonageServlet?command=qna_mod_form'">  
+      <input type="button"  value="수정하기"  class="cancel"  onclick="location.href='NonageServlet?command=qna_mod_form&qseq=${qnaVO.qseq}'">  
       </c:if>  
       </div>
     </form>
