@@ -17,12 +17,12 @@ public class AdminOrderSaveAction implements Action {
 
 		String[] resultArr = request.getParameterValues("result");
 		
-		System.out.println(resultArr);
+		System.out.println("resultArr : "+resultArr);
 
-		for (String oseq : resultArr) {
-			System.out.println(oseq);
+		for (String odseq : resultArr) {
+			System.out.println(odseq);
 			OrderDAO orderDAO = OrderDAO.getInstance();
-			orderDAO.updateOrderResult(oseq);
+			orderDAO.updateOrderResult(odseq);
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}

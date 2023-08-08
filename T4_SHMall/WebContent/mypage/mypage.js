@@ -3,6 +3,7 @@ function go_cart() {
     alert("수량을 입력하여 주세요.");
     document.formm.quantity.focus();
   } else {
+	
     document.formm.action = "NonageServlet?command=cart_insert";
     document.formm.submit();
   }

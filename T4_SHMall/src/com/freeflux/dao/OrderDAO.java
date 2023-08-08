@@ -217,12 +217,12 @@ public class OrderDAO {
 	
 	//관리자가 최종적으로 결제 처리를 함.
 	//1. order_detail 테이블의 result를 2로 바꿈
-	//2. product 테이블의 재고에서 -1 처리, 단 조건을 붙여서 inventory가 음수가 되지 않도록 해야함.
-	public void updateOrderResult(String oseq) {
+	//2. product 테이블의 inventory에서 -(order_detail.quantity) 처리, 단 조건을 붙여서 inventory가 음수가 되지 않도록 해야함.
+	public void updateOrderResult(String odseq) {
 		String sql = "update order_detail set result='2' where odseq=?";
 		String sql2 = "update product " + 
 				"set inventory = case " + 
-				"                when inventory>0 then inventory-1 " + 
+				"                when inventory>0 then inventory-(select quantity from order_detail where odseq=?) " + 
 				"                else 0 " + 
 				"                END " + 
 				"where pseq = (select p.pseq " + 
@@ -238,11 +238,12 @@ public class OrderDAO {
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, oseq);
+			pstmt.setString(1, odseq);
 			pstmt.executeUpdate();
 			
 			pstmt2 = conn.prepareStatement(sql2);
-			pstmt2.setString(1, oseq);
+			pstmt2.setString(1, odseq);
+			pstmt2.setString(2, odseq);
 			pstmt2.executeUpdate();
 			
 		} catch (Exception e) {
