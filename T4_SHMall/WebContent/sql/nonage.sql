@@ -159,34 +159,36 @@
 	create or replace view cart_view
 	as
 	select o.cseq, o.id, o.pseq, m.name mname, p.name pname, 
-	o.quantity, o.indate, p.price2, o.result 
+	o.quantity, o.indate, p.price2, o.result, p.deleted 
 	from cart o, member m, product p 
 	where o.id = m.id and o.pseq = p.pseq
-	and result='1';
+	and result='1' and p.deleted='X';
 	
 	create or replace view order_view
 	as
 	select d.odseq, o.oseq, o.id, o.indate, d.pseq,d.quantity, m.name mname,
-	m.zip_num, m.address, m.phone, p.name pname, p.price2, d.result   
+	m.zip_num, m.address, m.phone, m.useyn, p.name pname, p.price2, p.deleted, d.result   
 	from orders o, order_detail d, member m, product p 
-	where o.oseq=d.oseq and o.id = m.id and d.pseq = p.pseq;
+	where o.oseq=d.oseq and o.id = m.id and d.pseq = p.pseq and m.useyn='y' and p.deleted='X';
 	           
 	-- 베스트 상품
 	create or replace view best_pro_view
 	as
-	select pseq, name, price2, image 
-	from( select rownum, pseq, name, price2, image 
+	select pseq, name, price2, image, deleted
+	from( select rownum, pseq, name, price2, image, deleted
 	      from product  
-	      where bestyn='y' 
+	      where bestyn='y'
+          and deleted='X'
 	      order by indate desc)
 	where  rownum <=4;
 	
 	-- 신상품
 	create or replace view new_pro_view
 	as
-	select pseq, name, price2, image 
-	from( select rownum, pseq, name, price2, image 
+	select pseq, name, price2, image, deleted
+	from( select rownum, pseq, name, price2, image, deleted 
 	      from product  
 	      where useyn='y' 
+          and deleted='X'
 	      order by indate desc)
 	where  rownum <=4;

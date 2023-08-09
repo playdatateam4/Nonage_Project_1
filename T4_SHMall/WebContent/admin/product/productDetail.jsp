@@ -2,7 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/admin/header.jsp"%>
 <%@ include file="/admin/sub_menu.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>  
 <article>
 	<h1>상품 상세 보기</h1>
 	<form name="frm" method="post">
@@ -35,7 +38,7 @@
 				<th>상품이미지</th>
 				<td colspan="5" align="center">
 					<!--[7] 상품 이미지를 출력하기 --> <img
-					src="product_images/${productVO.image}" width="200pt">
+					src="${contextPath}/product_images/${productVO.image}" width="200pt">
 				</td>
 			</tr>
 

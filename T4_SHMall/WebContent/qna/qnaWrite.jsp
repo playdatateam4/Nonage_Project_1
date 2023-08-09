@@ -10,9 +10,9 @@
 		action="NonageServlet?command=qna_write">
 			<fieldset>	
 				<legend>Board Info</legend>		
-			    <label>Title</label>
+			    <label>제목</label>
 			    <input type="text" name="subject"  size="77" ><br>
-				<label>Content</label>
+				<label>질문내용</label>
 			    <textarea rows="8" cols="65" name="content"></textarea><br>
 			</fieldset>   
 		<div class="clear"></div>

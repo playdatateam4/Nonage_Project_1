@@ -19,14 +19,17 @@
 <script type="text/javascript" src="${contextPath}/mypage/mypage.js"></script>
 </head>
 
+
 <body>
 	<div id="wrap">
 		<!--헤더파일 들어가는 곳 시작 -->
 		<header>
 			<!--로고 들어가는 곳 시작--->
 			<div id="logo">
+
 				<a href="${contextPath}/main"> <img
 					src="${contextPath}/css/images/logo.gif" width="180" height="100" alt="nonageshop">
+
 				</a>
 			</div>
 			<!--로고 들어가는 곳 끝-->
@@ -78,6 +81,8 @@
 					<li><a href="${contextPath}/category/boots">Boots</a>
 					</li>
 					<li><a href="${contextPath}/category/sandals">Sandals</a>
+					</li>
+					<li><a href="${contextPath}/category/slippers">Slippers</a>
 					</li>
 					<li><a href="${contextPath}/category/sneakers">Sneakers</a>
 					</li>

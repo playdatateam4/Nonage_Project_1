@@ -114,6 +114,24 @@ public class QnaDAO {
 			DBManager.close(con, pstmt);
 		}
 	}
+	// 답변 대기 중인 QnA 취소 기능 추가
+	public void deleteQna(String qseq) {
+		String sql = "delete from qna where qseq=?";
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, qseq);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(con, pstmt);
+		}
+	}
 
 	/*
 	 * * 관리자 모드에서 필요한 메소드

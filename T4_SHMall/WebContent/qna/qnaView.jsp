@@ -29,8 +29,9 @@
     <div class="clear"></div>
      <div id="buttons" style="float:right">
       <input type="button"  value="목록보기"     class="submit"  onclick="location.href='NonageServlet?command=qna_list'"> 
-      <c:if test="${qnaVO.qseq eq '1'}">
-      <input type="button"  value="수정하기"  class="cancel"  onclick="location.href='NonageServlet?command=qna_mod_form'">  
+      <c:if test="${qnaVO.rep eq '1'}">
+      <input type="button"  value="수정하기"  class="cancel"  onclick="location.href='NonageServlet?command=qna_mod_form&qseq=${qnaVO.qseq}'">  
+      <input type="button"  value="질문취소"  class="cancel"  onclick="location.href='NonageServlet?command=qna_delete&qseq=${qnaVO.qseq}'">
       </c:if>  
       </div>
     </form>

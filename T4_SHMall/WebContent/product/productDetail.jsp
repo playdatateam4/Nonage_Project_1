@@ -3,6 +3,10 @@
 <%@ include file="../header.jsp" %>  
 <%@ include file="sub_img.html"%> 
 <%@ include file="sub_menu.html" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"></c:set>  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -19,7 +23,7 @@ $(document).ready(function() {
           <legend> Item detail Info</legend>  
           <a href="NonageServlet?command=product_detail&pseq=${productVO.pseq}">         
             <span style="float: left;">
-              <img  src="product_images/${productVO.image}"  />
+              <img  src="${contextPath}/product_images/${productVO.image}"  />
             </span>              
             <h2> ${productVO.name} </h2>  
           </a>    
