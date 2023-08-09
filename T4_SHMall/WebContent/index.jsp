@@ -29,7 +29,7 @@
        <!-- contextPath + mall/productDeatailAction.do 라는 하이퍼 링크를 생성하면서 
 			?pseq= 에 productVO의 pseq값을 인자로 전달한다 -->
 				<a
-					href="NonageServlet?command=product_detail&pseq=${productVO.pseq}">
+					href="${contextPath}/prdt/detail?pseq=${productVO.pseq}">
 					<img src="${contextPath}/product_images/${productVO.image}" />
 
 					<h3>${productVO.name}</h3>
@@ -45,7 +45,7 @@
 		<c:forEach items="${bestProductList}" var="productVO">
 			<div id="item">
 				<a
-					href="${contextPath}/main/ProductDetailAction.do?pseq=${productVO.pseq}">
+					href="${contextPath}/prdt/detail?pseq=${productVO.pseq}">
 					
 					<img src="product_images/${productVO.image}" />
 					<h3>${productVO.name}</h3>
