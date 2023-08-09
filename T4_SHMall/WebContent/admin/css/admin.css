@@ -407,6 +407,12 @@ div.reviewdiv table.reviewtable {
 	width: 1000px;
 }
 
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+	cursor: pointer;
+}
+
 #check table {
 	border: 1px solid gray;
 	border-spacing: 5px;
