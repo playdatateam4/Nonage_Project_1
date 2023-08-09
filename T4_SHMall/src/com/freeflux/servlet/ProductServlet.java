@@ -73,7 +73,7 @@ public class ProductServlet extends HttpServlet {
 				action= new ContractAction();
 			} else if (path.equals("/detail")) {
 				action = new ProductDetailAction();
-			}
+			} 
 			
 			if (action != null) {
 				action.execute(request, response);
