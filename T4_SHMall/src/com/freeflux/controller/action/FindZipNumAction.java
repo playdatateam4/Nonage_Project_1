@@ -15,7 +15,7 @@ public class FindZipNumAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "member/findZipNum.jsp";
+		String url = "/member/findZipNum.jsp";
 
 		String dong = request.getParameter("dong");
 

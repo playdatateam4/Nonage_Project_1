@@ -18,7 +18,7 @@ function go_save__join() {
     alert("이메일을 입력해 주세요.");
     document.formm.email.focus();
   } else {
-    document.formm.action = "NonageServlet?command=join";
+    document.formm.action = "joinAction";
     document.formm.submit();
   }
 }
@@ -29,21 +29,21 @@ function idcheck() {
     document.formm.id.focus();
     return;
   }
-  var url = "NonageServlet?command=id_check_form&id=" 
+  var url = "id_check_form?id=" 
 + document.formm.id.value;
   window.open( url, "_blank_1",
 "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=330, height=200");
 }
 
 function post_zip() {
-  var url = "NonageServlet?command=find_zip_num";
+  var url = "find_zip_num";
   window.open( url, "_blank_1",
 "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=550, height=300, top=300, left=300, ");
 }
 
 function go_next() {
   if (document.formm.okon1[0].checked == true) {
-    document.formm.action = "NonageServlet?command=join_form&contract=agree";
+    document.formm.action = "joinForm?contract=agree";
     document.formm.submit();
   } else if (document.formm.okon1[1].checked == true) {
     alert('약관에 동의하셔야만 합니다.');
@@ -67,9 +67,8 @@ function findMemberId() { //이름,이메일로 '찾기' 버튼
 	   
 	    $.ajax({
 	        type: "POST",
-	        url: "NonageServlet",
+	        url: "findUsr/find_id",
 	        data: {
-	            command: "find_id",
 	            name: name,
 	            email: email
 	        },
@@ -105,9 +104,8 @@ function findPassword() {//아이디, 이름, 이메일을 통해 비밀번호 �
 	
 	$.ajax({
         type: "POST",
-        url: "NonageServlet",
+        url: "findUsr/find_pwd",
         data: {
-            command: "find_pwd",
             memberId : memberId,
             name: name,
             email: email

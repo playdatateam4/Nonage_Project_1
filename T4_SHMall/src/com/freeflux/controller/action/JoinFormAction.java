@@ -11,7 +11,7 @@ public class JoinFormAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "NonageServlet?command=contract";
+		String url = "join/contract";
 
 		System.out.println(request.getParameter("contract"));
 		

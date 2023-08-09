@@ -37,11 +37,11 @@
 				<ul>
 					<c:choose>
 						<c:when test="${empty sessionScope.loginUser}">
-							<li><a href="${contextPath}/main/login_form.do"
+							<li><a href="${contextPath}/login/loginForm"
 								style="width: 110px;">LOGIN</a> 
 							</li>
 							<li>/</li>
-							<li><a href="${contextPath}/main/contract.do">JOIN</a></li>
+							<li><a href="${contextPath}/join/contract">JOIN</a></li>
 							<li>/</li>
 							<li><a href="${contextPath}/main/cart_list.do">CART</a></li>
 							<li>/</li>
