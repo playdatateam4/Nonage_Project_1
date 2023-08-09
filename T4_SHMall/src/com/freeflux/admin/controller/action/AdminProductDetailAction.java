@@ -29,7 +29,7 @@ public class AdminProductDetailAction implements Action {
 		if (request.getParameter("tpage") != null) {
 			tpage = request.getParameter("tpage");
 		}
-		String kindList[] = { "0", "Heels", "Boots", "Sandals", "Slipers", "Sneakers", "Sale" };
+		String kindList[] = { "0", "Heels", "Boots", "Sandals", "Slippers", "Sneakers", "Sale" };
 		request.setAttribute("tpage", tpage);
 		int index = Integer.parseInt(productVO.getKind().trim());
 		request.setAttribute("kind", kindList[index]);

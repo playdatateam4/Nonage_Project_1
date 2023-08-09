@@ -149,7 +149,7 @@ public class OrderDAO {
 	// 총 주문 내역 조회 ( 진행 완료인 주문 내역도 띄워 주기 )
 	public ArrayList<Integer> selectTotalSeqOrderIng(String id) {
 		ArrayList<Integer> oseqList = new ArrayList<Integer>();
-		String sql = "select distinct oseq from order_view " + "where id=? order by oseq desc";
+		String sql = "select distinct oseq from order_view " + "where id=? and useyn='y' order by oseq desc";
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
