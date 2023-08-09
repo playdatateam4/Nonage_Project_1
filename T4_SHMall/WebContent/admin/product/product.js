@@ -11,15 +11,6 @@ function NumFormat(t) // 원 단위, 찍어주기
 	return t;
 }
 
-function go_ab() // 판매가-원가=순매출을 replace해서 계산해 준다.
-{
-	var theForm = document.frm;
-	var a = theForm.price2.value.replace(/,/g, '');
-	var b = theForm.price1.value.replace(/,/g, '');
-	var ab = parseInt(a) - parseInt(b);
-	theForm.price3.value = ab;
-}
-
 // 폼에 입력이 올바른지 판단한다.
 // productWrite.jsp에서 사용한다.
 function go_save() 
@@ -74,6 +65,16 @@ function go_mov()
 	theForm.action = "NonageServlet?command=admin_product_list";
 	theForm.submit();
 }
+
+function go_ab() // 판매가-원가=순매출을 replace해서 계산해 준다.
+{
+	var theForm = document.frm;
+	var a = theForm.price2.value.replace(/,/g, '');
+	var b = theForm.price1.value.replace(/,/g, '');
+	var ab = parseInt(a) - parseInt(b);
+	theForm.price3.value = ab;
+}
+
 //projectList.jsp
 function go_search() {
 	var theForm = document.frm;

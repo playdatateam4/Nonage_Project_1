@@ -76,7 +76,7 @@ function findMemberId() { //이름,이메일로 '찾기' 버튼
 	        success: function(response) {
 	            window.open("",
 						"아이디 찾기",
-						"width=400, height=500, history=no, resizable=no, status=no, scrollbars=yes, menubar=no").document.write("아이디는 " + response + "입니다.");
+						"width=400, height=500, history=no, resizable=no, status=no, scrollbars=yes, menubar=no").document.write(response);
 	        }
 	    });
 	}
