@@ -232,6 +232,6 @@ commit;
 -- 2023-08-07 허찬
 -- product table useyn 디폴트 값 'n'으로 변경 (useyn는 중고 여부,1은 예,0은 아니요)
 -- 테이블 생성문을 바꿔도 되고 밑 sql문 사용해도됩니다
--- alter table product
--- MODIFY useyn DEFAULT 'n';
--- commit;
+alter table product
+MODIFY useyn DEFAULT 'n';
+commit;

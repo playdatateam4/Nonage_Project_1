@@ -31,7 +31,7 @@
 	    price3     number(7)     default '0',
 	    content    varchar2(1000),
 	    image      varchar2(50)  default 'default.jpg',
-	    useyn      char(1)       default 'y',
+	    useyn      char(1)       default 'n',
 	    bestyn     char(1)       default 'n',
 	    indate     date          default sysdate  
 	);
@@ -159,34 +159,81 @@
 	create or replace view cart_view
 	as
 	select o.cseq, o.id, o.pseq, m.name mname, p.name pname, 
-	o.quantity, o.indate, p.price2, o.result 
+	o.quantity, o.indate, p.price2, o.result, p.deleted 
 	from cart o, member m, product p 
 	where o.id = m.id and o.pseq = p.pseq
-	and result='1';
+	and result='1' and p.deleted='X';
 	
 	create or replace view order_view
 	as
 	select d.odseq, o.oseq, o.id, o.indate, d.pseq,d.quantity, m.name mname,
-	m.zip_num, m.address, m.phone, p.name pname, p.price2, d.result   
+	m.zip_num, m.address, m.phone, m.useyn, p.name pname, p.price2, p.deleted, d.result   
 	from orders o, order_detail d, member m, product p 
-	where o.oseq=d.oseq and o.id = m.id and d.pseq = p.pseq;
+	where o.oseq=d.oseq and o.id = m.id and d.pseq = p.pseq and m.useyn='y' and p.deleted='X';
 	           
 	-- 베스트 상품
 	create or replace view best_pro_view
 	as
-	select pseq, name, price2, image 
-	from( select rownum, pseq, name, price2, image 
+	select pseq, name, price2, image, deleted
+	from( select rownum, pseq, name, price2, image, deleted
 	      from product  
-	      where bestyn='y' 
+	      where bestyn='y'
+          and deleted='X'
 	      order by indate desc)
 	where  rownum <=4;
 	
 	-- 신상품
 	create or replace view new_pro_view
 	as
-	select pseq, name, price2, image 
-	from( select rownum, pseq, name, price2, image 
+	select pseq, name, price2, image, deleted
+	from( select rownum, pseq, name, price2, image, deleted 
 	      from product  
 	      where useyn='y' 
+          and deleted='X'
 	      order by indate desc)
 	where  rownum <=4;
+
+
+-- 2023.08.06 허찬
+-- 회원정보 완전 삭제 기능 테스트 sql문 추가
+insert into member(id, pwd, name, zip_num, address, phone) values
+	('four', '4444', '김나포', '133-110', '서울시광동구성수동1가 1번지21호', '017-777-7777');
+insert into cart(cseq,id, pseq, quantity) values(cart_seq.nextval, 'four', 1, 1);
+insert into orders(oseq, id) values(orders_seq.nextval, 'four');
+insert into qna (qseq, subject, content, id)
+	values(qna_seq.nextval, '테스트4', '질문내용4', 'four');
+	commit;
+
+-- 2023.08.07 허찬
+-- product 테이블에 inventory 칼럼 추가
+ALTER TABLE product
+ADD inventory NUMBER DEFAULT 1 NOT NULL;
+
+-- product 테이블 목록 재고 간단 업데이트
+
+UPDATE product set inventory = 10 where pseq = 1;
+UPDATE product set inventory = 10 where pseq = 2;
+UPDATE product set inventory = 10 where pseq = 3;
+UPDATE product set inventory = 10 where pseq = 4;
+UPDATE product set inventory = 10 where pseq = 5;
+UPDATE product set inventory = 10 where pseq = 6;
+UPDATE product set inventory = 10 where pseq = 7;
+UPDATE product set inventory = 10 where pseq = 8;
+UPDATE product set inventory = 10 where pseq = 9;
+UPDATE product set inventory = 10 where pseq = 10;
+UPDATE product set inventory = 10 where pseq = 11;
+UPDATE product set inventory = 10 where pseq = 12;
+commit;
+
+-- 2023-08-07 백승주
+-- 상품 리스트에 삭제 처리 표시 기능을 위한 칼럼 추가
+ALTER TABLE product
+add deleted varchar(1) default 'X' not null;
+commit;
+
+-- 2023-08-07 허찬
+-- product table useyn 디폴트 값 'n'으로 변경 (useyn는 중고 여부,1은 예,0은 아니요)
+-- 테이블 생성문을 바꿔도 되고 밑 sql문 사용해도됩니다
+-- alter table product
+-- MODIFY useyn DEFAULT 'n';
+-- commit;

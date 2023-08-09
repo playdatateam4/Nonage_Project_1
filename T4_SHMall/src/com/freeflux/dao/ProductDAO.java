@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
+import com.freeflux.dto.OrderVO;
 import com.freeflux.dto.ProductVO;
 import com.freeflux.util.DBManager;
 
@@ -363,46 +365,105 @@ public class ProductDAO {
 		}
 		return result;
 	}
-
+	//멤버 테이블 및 연관 테이블에서 제거 
 	public void deleteMember(String id) {
 		
-		String sql4 = "delete from member where id=?";
 		String sql1 = "delete from cart where id=?";
+
+		List<Integer> orderList = selectAllOrder(id);
+		for(int oseq : orderList) {
+			deleteOrderDetail(oseq);
+		}
 		String sql2 = "delete from orders where id=?";
 		String sql3 = "delete from qna where id=?";
+		String sql4 = "delete from member where id=?";
 		
 		Connection con = null;
-		PreparedStatement pstmt4 = null;
-		PreparedStatement pstmt1 = null;
-		PreparedStatement pstmt2 = null;
-		PreparedStatement pstmt3 = null;
+		PreparedStatement pstmt = null;
 	
 		try {
 			con = DBManager.getConnection();
 			
-			pstmt1 = con.prepareStatement(sql1);
-			pstmt1.setString(1,id);
-			pstmt1.executeUpdate();
+			pstmt = con.prepareStatement(sql1);
+			pstmt.setString(1,id);
+			pstmt.executeUpdate();
 			
-			pstmt2 = con.prepareStatement(sql2);
-			pstmt2.setString(1,id);
-			pstmt2.executeUpdate();
+			pstmt = con.prepareStatement(sql2);
+			pstmt.setString(1,id);
+			pstmt.executeUpdate();
 			
-			pstmt3 = con.prepareStatement(sql3);
-			pstmt3.setString(1,id);
-			pstmt3.executeUpdate();
+			pstmt = con.prepareStatement(sql3);
+			pstmt.setString(1,id);
+			pstmt.executeUpdate();
 			
-			pstmt4 = con.prepareStatement(sql4);
-			pstmt4.setString(1,id);
-			pstmt4.executeUpdate();
+			pstmt = con.prepareStatement(sql4);
+			pstmt.setString(1,id);
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			DBManager.close(con, pstmt1);
-			DBManager.close(con, pstmt2);
-			DBManager.close(con, pstmt3);
-			DBManager.close(con, pstmt4);
+			DBManager.close(con, pstmt);
 		}
 		
+	}
+	
+	public void deleteOrderDetail(int oseq) {
+		String sql ="delete from order_detail where oseq=?";
+		boolean result=false;
+		
+		Connection con=null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.getConnection();
+			
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, oseq);
+			result=pstmt.execute();
+			
+			if(result) {
+				System.out.println("Delete from order_detail => SUCCESS");
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Delete from order_detail => FAIL");
+			System.out.println(e.getMessage());
+		} finally {
+			DBManager.close(con, pstmt);
+		}
+	}
+	
+	public List selectAllOrder(String id) {
+		String query = "select oseq from orders where id=?";
+		
+		Connection con=null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		List<Integer> orderList = new ArrayList<>();
+		
+		try {
+			
+			con= DBManager.getConnection();
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int oseq = rs.getInt("oseq");
+				orderList.add(oseq);
+			}
+			
+			if(orderList.size() > 0) {
+				System.out.println("select All Order => SUCCESS");
+			}
+		} catch (SQLException e) {
+			System.out.println("select All Order => FAIL");
+			System.out.println(e.getMessage());
+		} finally {
+			DBManager.close(con, pstmt);
+		}
+		
+		return orderList;
 	}
 }

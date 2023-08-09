@@ -3,6 +3,7 @@ package com.freeflux.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.freeflux.dto.CartVO;
@@ -121,6 +122,60 @@ public class OrderDAO {
 		}
 		return orderList;
 	}
+	
+	//사용자가 결제 중인 상품 삭제
+	public void deleteOrder(String oseq, String odseq) {
+		String sql = "delete from order_detail where oseq=? and odseq=?";
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, oseq);
+			pstmt.setString(2, odseq);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQLException in deleteOrder : "+e.getMessage());
+		}finally {
+			DBManager.close(con, pstmt);
+		}
+	}
+	
+	//order_detail 테이블을 체크해서 oseq=?를 가진 레코드가 하나라도 있으면(주문이 빈 것이 아니므로) 참 리턴한다.
+	public boolean checkIsOrder_detail_is_Empty(String oseq) {
+		String sql = "SELECT COUNT(*) FROM order_detail WHERE oseq = ?";
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Boolean answer = null;
+		
+		try {
+			con = DBManager.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,oseq);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				if(rs.getInt(1)>0) { //oseq=rs.getInt(1)를 가진 레코드를 하나 이상 가지고 있다는 의미
+					answer = true;
+					break;
+				}else {
+					//모든 레코드를 순회해도 oseq=rs.getInt(1)를 가진 레코드가 없다는 의미이다.
+					answer = false;
+				}
+			}
+		} catch (SQLException e) {
+			System.out.println("SQLException in checkIsOrder_detail_is_Empty : "+e.getMessage());
+		}finally {
+			DBManager.close(con, pstmt ,rs);
+		}
+				
+		return answer;
+	}
+	
 
 	// 현재 진행 중인 주문 내역만 조회
 	public ArrayList<Integer> selectSeqOrderIng(String id) {
@@ -217,12 +272,12 @@ public class OrderDAO {
 	
 	//관리자가 최종적으로 결제 처리를 함.
 	//1. order_detail 테이블의 result를 2로 바꿈
-	//2. product 테이블의 재고에서 -1 처리, 단 조건을 붙여서 inventory가 음수가 되지 않도록 해야함.
-	public void updateOrderResult(String oseq) {
+	//2. product 테이블의 inventory에서 -(order_detail.quantity) 처리, 단 조건을 붙여서 inventory가 음수가 되지 않도록 해야함.
+	public void updateOrderResult(String odseq) {
 		String sql = "update order_detail set result='2' where odseq=?";
 		String sql2 = "update product " + 
 				"set inventory = case " + 
-				"                when inventory>0 then inventory-1 " + 
+				"                when inventory>0 then inventory-(select quantity from order_detail where odseq=?) " + 
 				"                else 0 " + 
 				"                END " + 
 				"where pseq = (select p.pseq " + 
@@ -238,11 +293,12 @@ public class OrderDAO {
 		try {
 			conn = DBManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, oseq);
+			pstmt.setString(1, odseq);
 			pstmt.executeUpdate();
 			
 			pstmt2 = conn.prepareStatement(sql2);
-			pstmt2.setString(1, oseq);
+			pstmt2.setString(1, odseq);
+			pstmt2.setString(2, odseq);
 			pstmt2.executeUpdate();
 			
 		} catch (Exception e) {
@@ -252,4 +308,5 @@ public class OrderDAO {
 			DBManager.close(conn, pstmt2);
 		}
 	}
+	
 }

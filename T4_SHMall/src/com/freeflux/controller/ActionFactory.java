@@ -62,7 +62,9 @@ public class ActionFactory {
 			action = new MyPageAction();
 		} else if (command.equals("order_detail")) {
 			action = new OrderDetailAction();
-		} else if (command.equals("order_all")) {
+		} else if (command.equals("order_delete")) {
+			action = new OrderDeleteAction();
+		}else if (command.equals("order_all")) {
 			action = new OrderAllAction();
 		} else if (command.equals("qna_list")) {
 			action = new QnaListAction();
@@ -84,6 +86,8 @@ public class ActionFactory {
 			action = new QnaModifyFormAction();
 		} else if (command.equals("qna_mod")) {
 			action = new QnaModifyAction();
+		} else if (command.equals("qna_delete")) {
+			action = new QnaDeleteAction();
 		}
 
 		// admin
