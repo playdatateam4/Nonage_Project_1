@@ -74,9 +74,59 @@ function findMemberId() { //이름,이메일로 '찾기' 버튼
 	            email: email
 	        },
 	        success: function(response) {
-	            window.open("",
-						"아이디 찾기",
-						"width=400, height=500, history=no, resizable=no, status=no, scrollbars=yes, menubar=no").document.write(response);
+	        	var styledResponse = `
+	                <html>
+	                <head>
+	                <script>
+	                	function closePopup(){
+	                		window.close()
+	                	}
+	                </script>
+	                    <style>
+	                        body {
+	                            font-family: 'Arial', sans-serif; 
+	                            background-color: #8a2be2; 
+	                            display: flex;
+	                            justify-content: center;
+	                            align-items: center;
+	                            height: 100vh;
+	                        }
+	                        .container {
+	                            padding: 20px;
+	                            background-color: #fff;
+	                            border-radius: 5px;
+	                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	                            width: 80%;
+	                            max-width: 300px;
+	                        }
+	                        button {
+	                            display: block;
+	                            margin-top: 10px;
+	                            padding: 10px 15px;
+	                            background-color: #007BFF;
+	                            color: #ffffff;
+	                            border: none;
+	                            border-radius: 5px;
+	                            cursor: pointer;
+	                            transition: background-color 0.2s;
+	                        }
+	                        button:hover {
+	                            background-color: #0056b3;
+	                        }
+	                    </style>
+	                </head>
+	                <body>
+	                    <div class="container">
+	                        ${response}
+	                        <button onclick="closePopup()">닫기</button>
+	                    </div>
+	                </body>
+	                </html>
+	            `;
+
+	            var popup = window.open("", "아이디 찾기", "width=400, height=500, history=no, resizable=no, status=no, scrollbars=yes, menubar=no");
+	            popup.document.write(styledResponse);
+	            popup.document.close();
 	        }
 	    });
 	}
