@@ -43,7 +43,7 @@ function post_zip() {
 
 function go_next() {
   if (document.formm.okon1[0].checked == true) {
-    document.formm.action = "NonageServlet?command=join_form";
+    document.formm.action = "NonageServlet?command=join_form&contract=agree";
     document.formm.submit();
   } else if (document.formm.okon1[1].checked == true) {
     alert('약관에 동의하셔야만 합니다.');
