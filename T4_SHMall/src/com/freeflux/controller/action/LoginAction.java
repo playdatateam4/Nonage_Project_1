@@ -24,7 +24,7 @@ public class LoginAction implements Action {
 	
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String url = "member/login_fail.jsp";
+        String url = "/member/login_fail.jsp";
         String login_result = "fail";
 
         HttpSession session = request.getSession();
@@ -59,7 +59,7 @@ public class LoginAction implements Action {
                     if (memberVO.getPwd().equals(request.getParameter("pwd")) && memberVO.getUseyn().equals("y")) {
                         session.removeAttribute("id");
                         session.setAttribute("loginUser", memberVO);
-                        url = "NonageServlet?command=index";
+                        url = "/main";
                     } else {
                         if (memberVO.getUseyn().equals("n")) {
                             login_result = "deleted";
@@ -73,7 +73,7 @@ public class LoginAction implements Action {
                         session.removeAttribute("id");
                         session.setAttribute("loginUser", workerVO);
                         session.setAttribute("workerId", workerVO.getId());
-                        url = "NonageServlet?command=index";
+                        url = "/main";
                     }
                 }
             }

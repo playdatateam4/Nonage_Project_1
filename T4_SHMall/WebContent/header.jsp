@@ -28,7 +28,7 @@
 			<div id="logo">
 
 				<a href="${contextPath}/main"> <img
-					src="${contextPath}/css/images/logo.gif" width="180" height="100" alt="nonageshop">
+					src="${contextPath}/images/logo.gif" width="180" height="100" alt="nonageshop">
 
 				</a>
 			</div>
@@ -53,7 +53,7 @@
 						<c:when test="${sessionScope.loginUser.logType eq 'worker'}">
 							<li style="color: orange">
 								${sessionScope.loginUser.name}(${sessionScope.loginUser.id})</li>
-							<li><a href="NonageServlet?command=logout">LOGOUT</a></li>
+							<li><a href="${contextPath}/login/logout">LOGOUT</a></li>
 							<li>/</li>
 							<li><a 	href="NonageServlet?command=admin_product_list" 
 									style="margin-left: 9px;">ADMIN PAGE</a></li>
@@ -61,7 +61,7 @@
 						<c:otherwise>
 							<li style="color: orange">
 								${sessionScope.loginUser.name}(${sessionScope.loginUser.id})</li>
-							<li><a href="${contextPath}/main/logout.do">LOGOUT</a></li>
+							<li><a href="${contextPath}/login/logout">LOGOUT</a></li>
 							<li>/</li>
 							<li><a href="${contextPath}/main/cart_list.do"">CART</a></li>
 							<li>/</li>

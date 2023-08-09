@@ -11,7 +11,7 @@ public class LogoutAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "NonageServlet?command=index";
+		String url = "/main";
 
 		HttpSession session = request.getSession(false);
 		if (session != null) {
