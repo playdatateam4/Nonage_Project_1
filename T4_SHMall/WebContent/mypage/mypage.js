@@ -1,3 +1,4 @@
+
 function getContextPath() {
     var loc = window.location;
     var pathname = loc.pathname;
@@ -6,21 +7,31 @@ function getContextPath() {
     return contextPath;
 }
 
+function delete_order(){
+	
+	 if(confirm("삭제하시겠습니까?")){
+			alert("결제 중 상품이 삭제되었습니다.");
+		    document.formm.action = "NonageServlet?command=order_delete";
+		    document.formm.submit();
+	 }
+	  
+}
+
 function go_cart() {
   if (document.formm.quantity.value == "") {
     alert("수량을 입력하여 주세요.");
     document.formm.quantity.focus();
   } else {
-	var contextPath = getContextPath(); // 웹 어플리케이션의 context path
-    var targetPath = contextPath + "/cart/insert";
-    document.formm.action = targetPath;
+	
+    document.formm.action = "NonageServlet?command=cart_insert";
     document.formm.submit();
   }
 }
 
 function go_cart_delete() {
   var count = 0;
-
+  
+  //장바구니 삭제를 몇 개 체크했는지 확인하는 코드
   if (document.formm.cseq.length == undefined) {
     if (document.formm.cseq.checked == true) {
       count++;
@@ -28,16 +39,17 @@ function go_cart_delete() {
   }
 
   for ( var i = 0; i < document.formm.cseq.length; i++) {
-    alert("" + document.formm.cseq[i].checked);
+    //alert("" + document.formm.cseq[i].checked);
     if (document.formm.cseq[i].checked == true) {
       count++;
-      alert("" + count);
+      //alert("" + count);
     }
   }
   if (count == 0) {
     alert("삭제할 항목을 선택해 주세요.");
 
   } else {
+	alert("장바구니에 담긴 삼품이 삭제되었습니다.");
     document.formm.action = "NonageServlet?command=cart_delete";
     document.formm.submit();
   }
