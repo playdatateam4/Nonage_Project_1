@@ -43,7 +43,7 @@
 							<li>/</li>
 							<li><a href="${contextPath}/join/contract">JOIN</a></li>
 							<li>/</li>
-							<li><a href="${contextPath}/main/cart_list.do">CART</a></li>
+							<li><a href="${contextPath}/cart">CART</a></li>
 							<li>/</li>
 							<li><a href="${contextPath}/main/mypage.do">MY PAGE</a></li>
 							<li>/</li>
@@ -63,7 +63,7 @@
 								${sessionScope.loginUser.name}(${sessionScope.loginUser.id})</li>
 							<li><a href="${contextPath}/login/logout">LOGOUT</a></li>
 							<li>/</li>
-							<li><a href="${contextPath}/main/cart_list.do"">CART</a></li>
+							<li><a href="${contextPath}/cart"">CART</a></li>
 							<li>/</li>
 							<li><a href="${contextPath}/main/mypage.do">MY PAGE</a></li>
 							<li>/</li>

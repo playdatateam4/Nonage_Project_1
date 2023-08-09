@@ -15,7 +15,7 @@ public class CartInsertAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "NonageServlet?command=cart_list";
+		String url = "/cart/list";
 		String go ="";
 		System.out.println(request.getParameter("go"));
 		if(request.getParameter("go") != null) {
@@ -25,7 +25,7 @@ public class CartInsertAction implements Action {
 		HttpSession session = request.getSession();
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 		if (loginUser == null) {
-			url = "NonageServlet?command=login_form";
+			url = "/login";
 		} else if(loginUser != null && go.equals("orderInsert")){
 			url = "NonageServlet?command=order_insert";
 			

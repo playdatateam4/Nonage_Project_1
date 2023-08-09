@@ -1,9 +1,19 @@
+function getContextPath() {
+    var loc = window.location;
+    var pathname = loc.pathname;
+    var index = pathname.indexOf("/", 1); // 첫 번째 "/" 다음의 문자열부터가 context path
+    var contextPath = index !== -1 ? pathname.substring(0, index) : pathname;
+    return contextPath;
+}
+
 function go_cart() {
   if (document.formm.quantity.value == "") {
     alert("수량을 입력하여 주세요.");
     document.formm.quantity.focus();
   } else {
-    document.formm.action = "NonageServlet?command=cart_insert";
+	var contextPath = getContextPath(); // 웹 어플리케이션의 context path
+    var targetPath = contextPath + "/cart/insert";
+    document.formm.action = targetPath;
     document.formm.submit();
   }
 }
