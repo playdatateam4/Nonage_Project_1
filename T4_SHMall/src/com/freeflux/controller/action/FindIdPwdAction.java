@@ -11,7 +11,7 @@ public class FindIdPwdAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "member/findIdAndPassword.jsp";
+		String url = "/member/findIdAndPassword.jsp";
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);

@@ -21,7 +21,7 @@ $(document).ready(function() {
       <form  method="post" name="formm">    
         <fieldset>
           <legend> Item detail Info</legend>  
-          <a href="NonageServlet?command=product_detail&pseq=${productVO.pseq}">         
+          <a href="${contextPath}/prdt/detail&pseq=${productVO.pseq}">         
             <span style="float: left;">
               <img  src="${contextPath}/product_images/${productVO.image}"  />
             </span>              

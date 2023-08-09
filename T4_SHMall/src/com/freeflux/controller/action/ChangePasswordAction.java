@@ -17,6 +17,7 @@ public class ChangePasswordAction implements Action {
 		    String newPwd = request.getParameter("newPwd");
 		    
 		    MemberDAO memberDAO = MemberDAO.getInstance();
+		    
 		    try {
 		    	boolean result = memberDAO.change_pwd(newPwd, userId);
 		    

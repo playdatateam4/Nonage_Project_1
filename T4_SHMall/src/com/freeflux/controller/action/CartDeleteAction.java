@@ -12,7 +12,7 @@ public class CartDeleteAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = "NonageServlet?command=cart_list";
+		String url = "/cart/list";
 
 		String[] cseqArr = request.getParameterValues("cseq");
 

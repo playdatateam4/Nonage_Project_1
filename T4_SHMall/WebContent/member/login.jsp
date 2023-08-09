@@ -5,7 +5,7 @@
 <%@ include file="sub_menu.html" %>       
   <article>
     <h1>Login</h1>
-    <form method="post" action="NonageServlet?command=login">
+    <form method="post" action="${contextPath}/login/loginAction">
         <fieldset>
         <legend></legend>
           <label>User ID</label>
@@ -17,9 +17,9 @@
         <div id="buttons">
             <input type="submit" value="로그인" class="submit">
             <input type="button" value="회원가입" class="cancel"
-                 onclick="location='NonageServlet?command=contract'">
+                 onclick="location='${contextPath}/join/contract'">
             <input type="button" value="아이디 비밀번호 찾기" class="submit"
-                 onclick="location='NonageServlet?command=find_id_pwd_form'">     
+                 onclick="location='${contextPath}/findUsr'">     
         </div>
     </form>  
   </article>

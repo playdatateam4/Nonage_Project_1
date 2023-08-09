@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.freeflux.controller.action.Action;
 
-@WebServlet("/NonageServlet")
+//@WebServlet("/NonageServlet")
 public class NonageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

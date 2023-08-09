@@ -1,3 +1,12 @@
+
+function getContextPath() {
+    var loc = window.location;
+    var pathname = loc.pathname;
+    var index = pathname.indexOf("/", 1); // 첫 번째 "/" 다음의 문자열부터가 context path
+    var contextPath = index !== -1 ? pathname.substring(0, index) : pathname;
+    return contextPath;
+}
+
 function delete_order(){
 	
 	 if(confirm("삭제하시겠습니까?")){
@@ -7,6 +16,7 @@ function delete_order(){
 	 }
 	  
 }
+
 function go_cart() {
   if (document.formm.quantity.value == "") {
     alert("수량을 입력하여 주세요.");
