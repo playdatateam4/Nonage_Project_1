@@ -31,6 +31,7 @@ public class OrderDAO {
 
 		try {
 			conn = DBManager.getConnection();
+			conn.setAutoCommit(false); // 트랜잭션 시작 
 
 			String selectMaxOseq = "select max(oseq) from orders";
 			pstmt = conn.prepareStatement(selectMaxOseq);
@@ -48,8 +49,15 @@ public class OrderDAO {
 			for (CartVO cartVO : cartList) {
 				insertOrderDetail(cartVO, maxOseq);
 			}
+			conn.commit(); // 트랜잭션 종료
 		} catch (Exception e) {
-			e.printStackTrace();
+			if (conn != null) {
+	            try {
+	                conn.rollback();  
+	            } catch (SQLException ex) {
+	                ex.printStackTrace();
+	            }
+			}
 		} finally {
 			DBManager.close(conn, pstmt);
 		}
